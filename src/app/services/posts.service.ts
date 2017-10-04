@@ -12,4 +12,11 @@ export class PostsService {
     return this.http.get('/api/posts')
       .map(res => res.json());
   }
+
+  // Get test post from API
+  getTestPost() {
+    console.log('test post');
+    return this.http.get('/api/tester')
+      .map(res => res.json());
+  }
 }

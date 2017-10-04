@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 
 import { PostsService } from './services/posts.service';
+import { TestComponent } from './test/test.component';
 
 // Define the routes
 const ROUTES = [
@@ -15,6 +16,14 @@ const ROUTES = [
     path: '',
     redirectTo: 'posts',
     pathMatch: 'full'
+  },
+  {
+    path: 'posted',
+    component: PostsComponent
+  },
+  {
+    path: 'tester',
+    component: TestComponent
   },
   {
     path: 'posts',
@@ -25,7 +34,8 @@ const ROUTES = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
