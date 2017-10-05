@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
 router.get('/posts', (req, res) => {
   // Get posts from the mock api
   // This should ideally be replaced with a service that connects to MongoDB
+  console.log('in routes api route');
   axios.get(`${API}/posts`)
     .then(posts => {
       res.status(200).json(posts.data);
@@ -47,14 +48,14 @@ function getOnePost() {
 
   posts = parse(csv, {columns: true}).map(post => {
     return {
-      Title: post.Title,
-      Body: post.Body,
-      UserId: post.UserId,
-      Id: post.Id
+      title: post.Title,
+      body: post.Body,
+      userId: post.UserId,
+      id: post.Id
     };
   });
   console.log(posts.length + ' posts loaded at ' + new Date());
-  console.log('first post: ' + posts[0].Title + ' ' + posts[0].Body);
+  console.log('first post: ' + posts[0].title + ' ' + posts[0].body);
   console.log('JSON.stringified posts: ' + JSON.stringify(posts));
 
   return JSON.stringify(posts);

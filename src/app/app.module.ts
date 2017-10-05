@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -9,14 +9,10 @@ import { PostsComponent } from './posts/posts.component';
 
 import { PostsService } from './services/posts.service';
 import { TestComponent } from './test/test.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 // Define the routes
-const ROUTES = [
-  {
-    path: '',
-    redirectTo: 'posts',
-    pathMatch: 'full'
-  },
+const appRoutes: Routes = [
   {
     path: 'posted',
     component: PostsComponent
@@ -28,20 +24,30 @@ const ROUTES = [
   {
     path: 'posts',
     component: PostsComponent
-  }
+  },
+  {
+    path: '',
+    redirectTo: 'posts',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
-    TestComponent
+    TestComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES) // Add routes to the app
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false } // <-- debugging purposes only
+    )
   ],
   providers: [PostsService],
   bootstrap: [AppComponent]
