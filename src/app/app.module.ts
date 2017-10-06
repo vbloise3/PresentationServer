@@ -10,6 +10,7 @@ import { PostsComponent } from './posts/posts.component';
 import { PostsService } from './services/posts.service';
 import { TestComponent } from './test/test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { Test2ComponentComponent } from './test2-component/test2-component.component';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -20,6 +21,10 @@ const appRoutes: Routes = [
   {
     path: 'tester',
     component: TestComponent
+  },
+  {
+    path: 'tester2',
+    component: Test2ComponentComponent
   },
   {
     path: 'posts',
@@ -38,7 +43,8 @@ const appRoutes: Routes = [
     AppComponent,
     PostsComponent,
     TestComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    Test2ComponentComponent
   ],
   imports: [
     BrowserModule,

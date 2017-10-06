@@ -39,12 +39,22 @@ router.get('/tester', (req, res) => {
   // This should ideally be replaced with a service that connects to MongoDB
   let testPosts = new Array(Post);
   console.log('in tester api route');
-  testPosts = getOnePost();
+  testPosts = getOnePost('./posts.csv');
   res.status(200).send(testPosts);
 });
 
-function getOnePost() {
-  let csv = fs.readFileSync('./posts.csv', 'utf8');
+// Get simple test #2
+router.get('/tester2', (req, res) => {
+  // Get posts from the mock api
+  // This should ideally be replaced with a service that connects to MongoDB
+  let testPosts = new Array(Post);
+  console.log('in tester2 api route');
+  testPosts = getOnePost('./otherData.csv');
+  res.status(200).send(testPosts);
+});
+
+function getOnePost(fileName) {
+  let csv = fs.readFileSync(fileName, 'utf8');
 
   posts = parse(csv, {columns: true}).map(post => {
     return {
