@@ -8,11 +8,27 @@ const router = express.Router();
 const axios = require('axios');
 const API = 'https://jsonplaceholder.typicode.com';
 
-// Create the Post Interface :)
-let Post = implement({Title: '', Body: '', UserId: '', Id: ''});
+// Create the IPost Interface :)
+let IPost = implement({Title: '', Body: '', UserId: '', Id: ''});
 //
 
-let posts = new Array(Post);
+let posts = new Array(IPost);
+
+// DATABASE SETUP
+var mongoose   = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/presentation'); // connect to our database
+// Handle the connection event
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+  console.log("DB connection alive");
+});
+
+// Post models lives here
+var Post     = require('../../src/app/models/post');
+
+// END DATABASE SETUP
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -20,7 +36,7 @@ router.get('/', (req, res) => {
 });
 
 // Get all posts
-router.get('/posts', (req, res) => {
+router.get('/postsOLD', (req, res) => {
   // Get posts from the mock api
   // This should ideally be replaced with a service that connects to MongoDB
   console.log('in routes api route');
@@ -52,6 +68,86 @@ router.get('/tester2', (req, res) => {
   testPosts = getOnePost('./otherData.csv');
   res.status(200).send(testPosts);
 });
+
+router.route('/posts')
+// create a post (accessed at POST http://localhost:8080/posts)
+  .post(function(req, res) {
+
+    var post = new Post();		// create a new instance of the Post model
+    post.Title = req.body.title;  // set the posts title (comes from the request)
+    post.Body = req.body.body;  // set the posts body (comes from the request)
+    post.UserId = req.body.userId;  // set the posts userId (comes from the request)
+    post.Id = req.body.id;  // set the posts id (comes from the request)
+
+    post.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({ message: 'Post created!' });
+    });
+
+
+  })
+
+  // get all the posts (accessed at GET http://localhost:8080/api/posts)
+  .get(function(req, res) {
+    console.log("in get all posts from database");
+    Post.find(function(err, posts) {
+      if (err)
+        res.send(err);
+
+      res.json(posts);
+      console.log("found " + posts.length + " posts");
+    });
+  });
+
+// on routes that end in /posts/:post_id
+// ----------------------------------------------------
+router.route('/posts/:post_id')
+
+// get the post with that id
+  .get(function(req, res) {
+    Post.findById(req.params.post_id, function(err, post) {
+      if (err)
+        res.send(err);
+      res.json(post);
+    });
+  })
+
+  // update the post with this id
+  .put(function(req, res) {
+    Post.findById(req.params.post_id, function(err, post) {
+
+      if (err)
+        res.send(err);
+
+      post.Title = req.body.title;
+      post.Body = req.body.body;  // set the posts body (comes from the request)
+      post.UserId = req.body.userId;  // set the posts userId (comes from the request)
+      post.Id = req.body.id;
+
+      post.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({ message: 'Post updated!' });
+      });
+
+    });
+  })
+
+  // delete the post with this id
+  .delete(function(req, res) {
+    Post.remove({
+      _id: req.params.post_id
+    }, function(err, post) {
+      if (err)
+        res.send(err);
+
+      res.json({ message: 'Successfully deleted' });
+    });
+  });
+
 
 function getOnePost(fileName) {
   let csv = fs.readFileSync(fileName, 'utf8');

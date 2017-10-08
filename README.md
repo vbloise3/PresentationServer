@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Database Setup
+
+0. Start MongoDb session: mongo
+1. Create a database called presentation: use presentation
+2. Then create the posts documents: db.posts.insert({title: "Angular/Node/Express/MongoDB Material Design", body: "The tools of the modern web developer", userId: "yoMoFo", Id: "1"})
+3. And another: db.posts.insert({title: "Run and Bike forever!", body: "Keep this front of mind every morning.", userId: "yoMoFoKu", Id: "2"})
+4. Check to see is all is well: db.posts.find()
+
+Run server and query the database as such: http://localhost:3070/posts
