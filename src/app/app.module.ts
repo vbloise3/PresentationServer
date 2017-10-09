@@ -8,9 +8,11 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 
 import { PostsService } from './services/posts.service';
+import { ElementsService } from './services/elements.service';
 import { TestComponent } from './test/test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { Test2ComponentComponent } from './test2-component/test2-component.component';
+import { ElementsComponent } from './elements/elements.component';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -31,6 +33,10 @@ const appRoutes: Routes = [
     component: PostsComponent
   },
   {
+    path: 'elements',
+    component: ElementsComponent
+  },
+  {
     path: '',
     redirectTo: 'posts',
     pathMatch: 'full'
@@ -44,7 +50,8 @@ const appRoutes: Routes = [
     PostsComponent,
     TestComponent,
     PageNotFoundComponent,
-    Test2ComponentComponent
+    Test2ComponentComponent,
+    ElementsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,7 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [PostsService],
+  providers: [PostsService, ElementsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
