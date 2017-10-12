@@ -2,6 +2,9 @@ var fs = require('fs');
 var parse = require('csv-parse/lib/sync');
 var path = require('path');
 var interface = require('../modules/interface').interface;
+// Interface = require('../modules/interfaceES6');
+// var interface = new Interface();
+
 const express = require('express');
 const router = express.Router();
 

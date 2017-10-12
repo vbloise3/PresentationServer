@@ -35,3 +35,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 4. Check to see is all is well: db.posts.find()
 
 Run server and query the database as such: http://localhost:3070/posts
+
+Add some more elements:
+db.elements.insert({position:"4",name:"Beryllium",weight:"9.0122",symbol:"Be"})
+db.elements.insert({position:"5",name:"Boron",weight:"10.811",symbol:"B"})
+db.elements.insert({position:"6",name:"Carbon",weight:"12.0107",symbol:"C"})
+db.elements.insert({position:"7",name:"Nitrogen",weight:"14.0067",symbol:"N"})
+db.elements.insert({position:"8",name:"Oxygen",weight:"15.9994",symbol:"O"})
+db.elements.insert({position:"9",name:"Fluorine",weight:"18.9984",symbol:"F"})
+db.elements.insert({position:"10",name:"Neon",weight:"20.1797",symbol:"Ne"})

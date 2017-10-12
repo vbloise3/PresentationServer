@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
@@ -13,6 +14,8 @@ import { TestComponent } from './test/test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { Test2ComponentComponent } from './test2-component/test2-component.component';
 import { ElementsComponent } from './elements/elements.component';
+import {TableDataService} from './services/table-data.service';
+import {MdButtonModule, MdCheckboxModule, MdTableModule} from '@angular/material';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -57,12 +60,14 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
+    MdButtonModule, MdCheckboxModule, MdTableModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [PostsService, ElementsService],
+  providers: [PostsService, ElementsService, TableDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

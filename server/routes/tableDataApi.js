@@ -12,13 +12,13 @@ let IElement = interface.implements({Position: '', Name: '', Weight: '', Symbol:
 let elements = new Array(IElement);
 
 // DATABASE SETUP
-var mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/presentation'); // connect to our database
+var mongooseTableData   = require('mongoose');
+mongooseTableData.connect('mongodb://localhost:27017/presentation'); // connect to our database
 // Handle the connection event
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+var dbTableData = mongooseTableData.connection;
+dbTableData.on('error', console.error.bind(console, 'connection error:'));
 
-db.once('open', function() {
+dbTableData.once('open', function() {
   console.log("DB connection alive");
 });
 
