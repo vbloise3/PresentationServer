@@ -15,7 +15,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { Test2ComponentComponent } from './test2-component/test2-component.component';
 import { ElementsComponent } from './elements/elements.component';
 import {TableDataService} from './services/table-data.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdSidenavModule, MdToolbarModule } from '@angular/material';
 import {MdButtonModule, MdCheckboxModule, MdTableModule} from '@angular/material';
+import { DeckComponent } from './deck/deck.component';
+import { SlideComponent } from './slide/slide.component';
+
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -40,6 +46,10 @@ const appRoutes: Routes = [
     component: ElementsComponent
   },
   {
+    path: 'deck',
+    component: DeckComponent
+  },
+  {
     path: '',
     redirectTo: 'posts',
     pathMatch: 'full'
@@ -54,7 +64,9 @@ const appRoutes: Routes = [
     TestComponent,
     PageNotFoundComponent,
     Test2ComponentComponent,
-    ElementsComponent
+    ElementsComponent,
+    DeckComponent,
+    SlideComponent
   ],
   imports: [
     BrowserModule,
@@ -62,12 +74,14 @@ const appRoutes: Routes = [
     HttpModule,
     HttpClientModule,
     MdButtonModule, MdCheckboxModule, MdTableModule,
+    MdSidenavModule, MdToolbarModule, BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
   providers: [PostsService, ElementsService, TableDataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

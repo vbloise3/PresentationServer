@@ -37,6 +37,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Run server and query the database as such: http://localhost:3070/posts
 
 Add some more elements:
+
 db.elements.insert({position:"4",name:"Beryllium",weight:"9.0122",symbol:"Be"})
 db.elements.insert({position:"5",name:"Boron",weight:"10.811",symbol:"B"})
 db.elements.insert({position:"6",name:"Carbon",weight:"12.0107",symbol:"C"})

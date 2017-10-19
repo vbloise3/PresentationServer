@@ -1,0 +1,10 @@
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+  <div class="app-content">
+    <md-card>
+      <h1>
+        <ng-content select="slide-title"></ng-content>
+      </h1>
+      <ng-content select="slide-content"></ng-content>
+    </md-card>
+  </div>
+</md-sidenav-container>
