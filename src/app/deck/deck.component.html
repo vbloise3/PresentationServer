@@ -1,8 +1,16 @@
 <app-slide>
-    <slide-title>
-      {{presentationName}}
-    </slide-title>
+  <slide-title>
+    {{presentationName}}
+  </slide-title>
   <slide-content>
+    <md-card>
       <app-elements></app-elements>
+    </md-card>
+    <md-card>
+      <div AgWordCloud [wordData]="wordData" [options]="options"></div>
+    </md-card>
+    <md-card>
+      <h1>Yose!</h1>
+    </md-card>
   </slide-content>
 </app-slide>

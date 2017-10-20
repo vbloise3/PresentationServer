@@ -15,11 +15,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { Test2ComponentComponent } from './test2-component/test2-component.component';
 import { ElementsComponent } from './elements/elements.component';
 import {TableDataService} from './services/table-data.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdSidenavModule, MdToolbarModule } from '@angular/material';
 import {MdButtonModule, MdCheckboxModule, MdTableModule} from '@angular/material';
 import { DeckComponent } from './deck/deck.component';
 import { SlideComponent } from './slide/slide.component';
+import { AgWordCloudModule} from 'angular4-word-cloud';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MyMaterialModule} from '../my-material.module';
 
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 
@@ -73,8 +74,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     HttpClientModule,
-    MdButtonModule, MdCheckboxModule, MdTableModule,
-    MdSidenavModule, MdToolbarModule, BrowserAnimationsModule,
+    AgWordCloudModule.forRoot(),
+    MyMaterialModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
