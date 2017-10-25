@@ -15,7 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { Test2ComponentComponent } from './test2-component/test2-component.component';
 import { ElementsComponent } from './elements/elements.component';
 import {TableDataService} from './services/table-data.service';
-import {MdButtonModule, MdCheckboxModule, MdTableModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/material';
 import { DeckComponent } from './deck/deck.component';
 import { SlideComponent } from './slide/slide.component';
 import { AgWordCloudModule} from 'angular4-word-cloud';

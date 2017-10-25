@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MdToolbarModule, MdIconModule, MdMenuModule, MdButtonModule,
-  MdInputModule, MdSelectModule, MdOptionModule,
-  MdCardModule, MdTableModule
+  MatToolbarModule, MatIconModule, MatMenuModule, MatButtonModule,
+  MatInputModule, MatSelectModule, MatOptionModule,
+  MatCardModule, MatTableModule
 } from '@angular/material';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -12,9 +12,9 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CommonModule
   ],
   exports: [
-    MdToolbarModule, MdIconModule, MdMenuModule, MdButtonModule,
-    MdInputModule, MdSelectModule, MdOptionModule, MdCardModule,
-    MdTableModule, BrowserAnimationsModule
+    MatToolbarModule, MatIconModule, MatMenuModule, MatButtonModule,
+    MatInputModule, MatSelectModule, MatOptionModule, MatCardModule,
+    MatTableModule, BrowserAnimationsModule
   ]
 })
 export class MyMaterialModule {}
