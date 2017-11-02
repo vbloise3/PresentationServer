@@ -100,6 +100,11 @@ md-toolbar {
   /*background-color: blue !important;*/
 }
 
+.shadowCard {
+  z-index: 2;
+  margin-bottom: 1em;
+}
+
 .textBottom {
   position: relative;
   bottom: -0.25em;
@@ -242,3 +247,4 @@ ul {
 #left{float:left;width:100px;}
 #right{float:right;width:100px;}
 #center{margin:0 auto;width:100px;}
+

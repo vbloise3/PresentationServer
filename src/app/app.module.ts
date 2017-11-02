@@ -22,6 +22,8 @@ import { AgWordCloudModule} from 'angular4-word-cloud';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyMaterialModule} from '../my-material.module';
 
+import { PresentationModule} from './presentation/presentation.module';
+
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 // Define the routes
@@ -70,6 +72,7 @@ const appRoutes: Routes = [
     SlideComponent
   ],
   imports: [
+    PresentationModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -81,6 +84,7 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
+  entryComponents: [  ],
   providers: [PostsService, ElementsService, TableDataService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]

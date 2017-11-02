@@ -1,15 +1,19 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { AgWordCloudModule, AgWordCloudData} from 'angular4-word-cloud';
+import { AdDirective } from '../ad.directive';
+import { AdItem } from '../ad-item';
+import { AdComponent} from '../ad/ad.component';
+import { AdService } from '../ad.service';
 
 @Component({
   selector: 'app-deck',
   templateUrl: './deck.component.html',
-  styleUrls: ['./deck.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./deck.component.css']
 })
 export class DeckComponent implements OnInit {
+
   presentationName: String;
-  interval: any;
   isDarkTheme = false;
 
   wordData: Array<AgWordCloudData> = [
@@ -59,10 +63,9 @@ export class DeckComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateData();
-
-    this.interval = setInterval(() => {
+    /*this.interval = setInterval(() => {
       this.generateData();
-    }, 15000);
+    }, 15000); */
   }
 
   generateData(): void {
