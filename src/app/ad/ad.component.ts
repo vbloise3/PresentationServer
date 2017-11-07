@@ -16,4 +16,6 @@ export class AdComponent implements OnInit {
 
 export interface AdComponent {
   data: any;
+  directory: string;
+  slide: string;
 }

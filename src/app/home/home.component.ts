@@ -32,15 +32,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   loadComponent() {
     this.currentAddIndex = (this.currentAddIndex + 1) % this.ads.length;
-    let adItem = this.ads[this.currentAddIndex];
+    const adItem = this.ads[this.currentAddIndex];
 
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
 
-    let viewContainerRef = this.adHost.viewContainerRef;
+    const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
 
-    let componentRef = viewContainerRef.createComponent(componentFactory);
+    const componentRef = viewContainerRef.createComponent(componentFactory);
     (<AdComponent>componentRef.instance).data = adItem.data;
+    (<AdComponent>componentRef.instance).directory = adItem.directory;
+    (<AdComponent>componentRef.instance).slide = adItem.slide;
   }
 
   getAds() {

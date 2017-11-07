@@ -69,6 +69,21 @@ router.get('/tester', (req, res) => {
   res.status(200).send(testPosts);
 });
 
+// Get html file for presentation slides
+// add parameters to define which presentation directory and which slide with the directory
+router.get('/firstPresentation', (req, res) => {
+  // console.log('in get first presentation');
+  // read the html file
+  // will want to send in file name and directory within public as parameters eventually
+  fs.readFile('public/firstPresentation.html', 'utf8', function (err, data) {
+    if (err) throw err;
+    var resultArray = data;
+    // console.log('returned html: ' + data);
+    res.send(data);
+  });
+});
+// end get html file for presentation slides
+
 // Get simple test #2
 router.get('/tester2', (req, res) => {
   // Get posts from the mock api
