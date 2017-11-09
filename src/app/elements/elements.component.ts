@@ -72,7 +72,7 @@ export class ElementsComponent implements OnInit {
   ngOnInit() {
     // Retrieve elements from the API
     this.elementsService.getAllElements().subscribe(elements => {
-      this.elements = elements;
+      this.elements = elements as Array<Element>;
     });
   }
 }

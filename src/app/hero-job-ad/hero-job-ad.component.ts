@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+// import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { AdComponent} from '../ad/ad.component';
 import {SlideService} from '../slide.service';
 

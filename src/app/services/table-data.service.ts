@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 let elements: Array<Element>;
 const service = '/api/elements';
@@ -28,7 +29,7 @@ export class TableDataService {
   }
 
   get2(): any {
-    return this.http.get<Element[]>(service).map( /// <<<=== use `map` here
+    return this.http.get<Element[]>(service);/*.map(
       (response) => {
         const data = response;
         if (data) {
@@ -36,7 +37,7 @@ export class TableDataService {
         }
         return elements;
       }
-    );
+    );*/
   }
 
   add(element) {

@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     // Retrieve posts from the API
     this.postsService.getAllPosts().subscribe(posts => {
-      this.posts = posts;
+      this.posts = posts as Array<any>;
     });
   }
 

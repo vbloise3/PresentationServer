@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+// import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SlideService {
 
   getSlideOld(): any {
     let data: any = '';
-      this.http.get('/api/firstPresentation').map(
+      this.http.get('/api/firstPresentation'); /*.map(
       (response) => {
         data = response;
         if (data) {
@@ -16,15 +17,15 @@ export class SlideService {
           console.log('did\'nt get the data');
         }
       });
-      return data;
+      return data; */
   }
 
   // Take parameters here to define which directory and which slide file within the directory
   getSlide(): any {
-    return this.http.get('/api/firstPresentation')
-      .map(res => res.text());
+    return this.http.get('/api/firstPresentation', { responseType: 'text'});
+      // .map(res => res.text());
   }
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
 }
