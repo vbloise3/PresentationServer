@@ -23,7 +23,7 @@ export class HeroJobAdComponent implements AdComponent, OnInit {
 
   ngOnInit() {
     // pass parameters on getSlide function to give directory and slide file within directory
-    this.slideService.getSlide().subscribe(template => {
+    this.slideService.getSlide(this.directory, this.slide).subscribe(template => {
       this.myTemplate = template;
     });
   }

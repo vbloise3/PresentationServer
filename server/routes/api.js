@@ -2,6 +2,8 @@ var fs = require('fs');
 var parse = require('csv-parse/lib/sync');
 var path = require('path');
 var interface = require('../modules/interface').interface;
+const url = require('url');
+const querystring = require('querystring');
 // Interface = require('../modules/interfaceES6');
 // var interface = new Interface();
 
@@ -71,11 +73,16 @@ router.get('/tester', (req, res) => {
 
 // Get html file for presentation slides
 // add parameters to define which presentation directory and which slide with the directory
-router.get('/firstPresentation', (req, res) => {
+router.get('/getThePresentation', (req, res) => {
   // console.log('in get first presentation');
   // read the html file
   // will want to send in file name and directory within public as parameters eventually
-  fs.readFile('public/firstPresentation.html', 'utf8', function (err, data) {
+  // var slideNumber = req.param('slide');
+  let parsedUrl = url.parse(req.originalUrl);
+  let parsedQs = querystring.parse(parsedUrl.query);
+  // console.log('slide: ' + parsedQs.slide);
+  // console.log('req.originalUrl: ' + req.originalUrl);
+  fs.readFile('public/' + parsedQs.directory + '/' + parsedQs.directory + parsedQs.slide + '.html', 'utf8', function (err, data) {
     if (err) throw err;
     var resultArray = data;
     // console.log('returned html: ' + data);

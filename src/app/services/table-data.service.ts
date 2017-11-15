@@ -29,7 +29,7 @@ export class TableDataService {
   }
 
   get2(): any {
-    return this.http.get<Element[]>(service);/*.map(
+    return this.http.get<Element[]>(service); /* .map(
       (response) => {
         const data = response;
         if (data) {
@@ -37,7 +37,7 @@ export class TableDataService {
         }
         return elements;
       }
-    );*/
+    ); */
   }
 
   add(element) {
