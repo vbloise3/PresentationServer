@@ -63,7 +63,7 @@ export class ElementsComponent implements OnInit {
   constructor(private elementsService: ElementsService, public tableDataservice: TableDataService) {
     this.tableDataservice.get2().subscribe(dataReceived => {
       data = dataReceived;
-      console.log(data.length + ' data elements from DataSource loaded at ' + new Date());
+      // console.log(data.length + ' data elements from DataSource loaded at ' + new Date());
       this.stuff = Observable.of(data);
       this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
     });
@@ -93,7 +93,7 @@ export class ExampleDataSource extends DataSource<any> {
   public loadTheElements() {
     this.service.get2().subscribe(dataReceived => {
       data = dataReceived;
-      console.log(data.length + ' data elements loaded at ' + new Date());
+      // console.log(data.length + ' data elements loaded at ' + new Date());
     });
   }
 

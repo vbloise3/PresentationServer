@@ -66,10 +66,7 @@ const appRoutes: Routes = [
     PostsComponent,
     TestComponent,
     PageNotFoundComponent,
-    Test2ComponentComponent,
-    ElementsComponent,
-    DeckComponent,
-    SlideComponent
+    Test2ComponentComponent
   ],
   imports: [
     PresentationModule,

@@ -15,7 +15,7 @@ export class HeroJobAdComponent implements AdComponent, OnInit {
   @Input() data: any;
   @Input() directory: string;
   @Input() slide: string;
-  private myTemplate: any = '';
+  public myTemplate: any = '';
 
   // receive parameters
   constructor(public slideService: SlideService) {

@@ -223,13 +223,13 @@ router.route('/elements')
 
   // get all the elements (accessed at GET http://localhost:8080/api/elements)
   .get(function(req, res) {
-    console.log("in get all elements from database");
+    // console.log("in get all elements from database");
     Element.find(function(err, elements) {
       if (err)
         res.send(err);
 
       res.json(elements);
-      console.log("found " + elements.length + " elements");
+      // console.log("found " + elements.length + " elements");
     });
   });
 

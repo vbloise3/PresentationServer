@@ -12,6 +12,8 @@ import { AdService } from '../ad.service';
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() ads: AdItem[];
+  @Input() presentationName = 'yose';
+  @Input() numberOfSlides = '0';
   currentAddIndex = -1;
   @ViewChild(AdDirective) adHost: AdDirective;
   subscription: any;
@@ -52,7 +54,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.ads = this.adService.getAds();
+    this.ads = this.adService.getAds(this.presentationName, this.numberOfSlides);
     /*this.generateData();*/
     /*this.interval = setInterval(() => {
       this.generateData();

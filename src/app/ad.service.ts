@@ -7,19 +7,19 @@ import { AdItem } from './ad-item';
 @Injectable()
 export class AdService {
   // pass parameter to components to state directory and which slide within directory to use for html template
-  getAds() {
+  getAds(presentationName, numberOfSlides) {
     return [
-      new AdItem(HeroProfileComponent, 'firstPresentation', '1', {name: 'Bombasto', bio: 'Brave as they come'}),
+      new AdItem(HeroProfileComponent, presentationName, (numberOfSlides - 4).toString(), {name: 'Bombasto', bio: 'Brave as they come'}),
 
-      new AdItem(HeroProfileComponent, 'firstPresentation', '2', {name: 'Dr IQ', bio: 'Smart as they come'}),
+      new AdItem(HeroProfileComponent, presentationName, (numberOfSlides - 3).toString(), {name: 'Dr IQ', bio: 'Smart as they come'}),
 
-      new AdItem(HeroJobAdComponent, 'firstPresentation', '3', {headline: 'Hiring for several positions',
+      new AdItem(HeroJobAdComponent, presentationName, (numberOfSlides - 2).toString(), {headline: 'Hiring for several positions',
         body: 'Submit your resume today!'}),
 
-      new AdItem(HeroJobAdComponent, 'firstPresentation', '4', {headline: 'Openings in all departments',
+      new AdItem(HeroJobAdComponent, presentationName, (numberOfSlides - 1).toString(), {headline: 'Openings in all departments',
         body: 'Apply today'}),
 
-      new AdItem(HeroJobAdComponent, 'firstPresentation', '5', {headline: 'I did it!!',
+      new AdItem(HeroJobAdComponent, presentationName, (numberOfSlides - 0).toString(), {headline: 'I did it!!',
         body: 'Deck and slides next!!'}),
     ];
   }

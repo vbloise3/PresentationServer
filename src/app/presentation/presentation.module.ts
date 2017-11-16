@@ -8,15 +8,23 @@ import { AdService } from '../ad.service';
 import { HomeComponent } from '../home/home.component';
 import { InnerTestComponent } from '../inner-test/inner-test.component';
 import { SlideService } from '../slide.service';
-
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import { ElementsComponent } from '../elements/elements.component';
+import { DeckComponent } from '../deck/deck.component';
+import { SlideComponent } from '../slide/slide.component';
+import { MyMaterialModule} from '../../my-material.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MyMaterialModule
   ],
-  declarations: [HomeComponent, AdComponent, AdDirective, HeroJobAdComponent, HeroProfileComponent, InnerTestComponent],
+  declarations: [HomeComponent, AdComponent, AdDirective, HeroJobAdComponent, HeroProfileComponent, InnerTestComponent, ElementsComponent,
+    DeckComponent,
+    SlideComponent],
   entryComponents: [HeroJobAdComponent, HeroProfileComponent],
   exports: [HomeComponent],
-  providers: [AdService, SlideService]
+  providers: [AdService, SlideService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class PresentationModule { }

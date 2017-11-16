@@ -6,4 +6,15 @@
   <p>directory: {{directory}}; slide: {{slide}}</p>
 
   <div [innerHtml]="myTemplate"></div>
+  <app-slide>
+    <slide-title>
+      {{directory}} - {{slide}}
+    </slide-title>
+    <slide-content>
+      <mat-card class="shadowCard">
+        <app-elements></app-elements>
+      </mat-card>
+    </slide-content>
+  </app-slide>
 </div>
+
