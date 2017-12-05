@@ -78,7 +78,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AgWordCloudModule.forRoot(),
+    // AgWordCloudModule.forRoot(),
     MyMaterialModule,
     RouterModule.forRoot(
       appRoutes,

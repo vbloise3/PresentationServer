@@ -17,10 +17,13 @@ import { NpsClientsService } from '../services/nps-clients.service';
 import { NpsClientsDataService } from '../services/nps-clients-data.service';
 import { NpsClientComponent } from '../nps-client/nps-client.component';
 
+import { AgWordCloudModule} from 'angular4-word-cloud';
+
 @NgModule({
   imports: [
     CommonModule,
-    MyMaterialModule
+    MyMaterialModule,
+    AgWordCloudModule.forRoot()
   ],
   declarations: [HomeComponent, AdComponent, AdDirective, HeroJobAdComponent, HeroProfileComponent, InnerTestComponent, ElementsComponent,
     NpsClientComponent,
