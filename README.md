@@ -45,3 +45,7 @@ db.elements.insert({position:"7",name:"Nitrogen",weight:"14.0067",symbol:"N"})
 db.elements.insert({position:"8",name:"Oxygen",weight:"15.9994",symbol:"O"})
 db.elements.insert({position:"9",name:"Fluorine",weight:"18.9984",symbol:"F"})
 db.elements.insert({position:"10",name:"Neon",weight:"20.1797",symbol:"Ne"})
+
+Add some Npsclients:
+db.npsclients.insert({name:"Jane Wagner", department: "Securities Lending", schedule: "Q1", relationshipManager: "Vince Bloise"})
+db.npsclients.insert({name:"Jime Kearney", department: "Investment Ops", schedule: "Q1", relationshipOwner: "Andy Lazzaro"})

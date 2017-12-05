@@ -13,6 +13,9 @@ import { ElementsComponent } from '../elements/elements.component';
 import { DeckComponent } from '../deck/deck.component';
 import { SlideComponent } from '../slide/slide.component';
 import { MyMaterialModule} from '../../my-material.module';
+import { NpsClientsService } from '../services/nps-clients.service';
+import { NpsClientsDataService } from '../services/nps-clients-data.service';
+import { NpsClientComponent } from '../nps-client/nps-client.component';
 
 @NgModule({
   imports: [
@@ -20,11 +23,12 @@ import { MyMaterialModule} from '../../my-material.module';
     MyMaterialModule
   ],
   declarations: [HomeComponent, AdComponent, AdDirective, HeroJobAdComponent, HeroProfileComponent, InnerTestComponent, ElementsComponent,
+    NpsClientComponent,
     DeckComponent,
     SlideComponent],
   entryComponents: [HeroJobAdComponent, HeroProfileComponent],
   exports: [HomeComponent],
-  providers: [AdService, SlideService],
+  providers: [AdService, SlideService, NpsClientsService, NpsClientsDataService],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class PresentationModule { }

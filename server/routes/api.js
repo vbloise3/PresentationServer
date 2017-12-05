@@ -21,8 +21,13 @@ let IPost = interface.implements({Title: '', Body: '', UserId: '', Id: ''});
 let IElement = interface.implements({Position: '', Name: '', Weight: '', Symbol: ''});
 //
 
+// Create the INpsclient Interface :)
+let INpsclient = interface.implements({Name: '', Department: '', Schedule: '', RelationshipOwner: ''});
+//
+
 let posts = new Array(IPost);
 let elements = new Array(IElement);
+let npsclients = new Array(INpsclient);
 
 // DATABASE SETUP
 var mongoose   = require('mongoose');
@@ -39,6 +44,8 @@ db.once('open', function() {
 var Post     = require('../../src/app/models/post');
 // Element models lives here
 var Element     = require('../../src/app/models/element');
+// Npsclient models lives here
+var Npsclient     = require('../../src/app/models/npsclient');
 
 // END DATABASE SETUP
 
@@ -297,6 +304,105 @@ function getOneElement(fileName) {
   console.log('JSON.stringified elements: ' + JSON.stringify(elements));
 
   return JSON.stringify(elements);
+}
+
+// Npsclient routes
+router.route('/npsclients')
+// create a npsclients (accessed at POST http://localhost:8080/npsclients)
+  .post(function(req, res) {
+
+    var npsclient = new Npsclient();		// create a new instance of the Element model
+    npsclient.Name = req.body.name;  // set the elements title (comes from the request)
+    npsclient.Department = req.body.department;  // set the elements body (comes from the request)
+    npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
+    npsclient.RelationshipOwner = req.body.relationshipOwner;  // set the elements id (comes from the request)
+
+    npsclient.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({ message: 'Npsclient created!' });
+    });
+
+
+  })
+
+  // get all the npsclinets (accessed at GET http://localhost:8080/api/npsclients)
+  .get(function(req, res) {
+    // console.log("in get all npsclients from database");
+    Npsclient.find(function(err, npsclients) {
+      if (err)
+        res.send(err);
+
+      res.json(npsclients);
+      // console.log("found " + npsclients.length + " npsclients");
+    });
+  });
+
+// on routes that end in /npsclients/:npsclient_id
+// ----------------------------------------------------
+router.route('/npsclients/:npsclient_id')
+
+// get the npsclients with that id
+  .get(function(req, res) {
+    Npsclient.findById(req.params.npsclient_id, function(err, npsclient) {
+      if (err)
+        res.send(err);
+      res.json(npsclient);
+    });
+  })
+
+  // update the npsclients with this id
+  .put(function(req, res) {
+    Npsclient.findById(req.params.npsclient_id, function(err, npsclient) {
+
+      if (err)
+        res.send(err);
+
+      npsclient.Namw = req.body.name;
+      npsclient.Department = req.body.department;  // set the elements body (comes from the request)
+      npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
+      npsclient.RelationshipOwner = req.body.relationshipOwner;
+
+      npsclient.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({ message: 'Npsclient updated!' });
+      });
+
+    });
+  })
+
+  // delete the npsclients with this id
+  .delete(function(req, res) {
+    Npsclient.remove({
+      _id: req.params.npsclient_id
+    }, function(err, npsclient) {
+      if (err)
+        res.send(err);
+
+      res.json({ message: 'Successfully deleted' });
+    });
+  });
+
+
+function getOneNpsclient(fileName) {
+  let csv = fs.readFileSync(fileName, 'utf8');
+
+  npsclients = parse(csv, {columns: true}).map(npsclient => {
+    return {
+      name: npsclient.Name,
+      department: npsclient.Department,
+      weight: npsclient.Schedule,
+      symbol: npsclient.RelationshipOwner
+    };
+  });
+  console.log(npsclients.length + ' npsclients loaded at ' + new Date());
+  console.log('first npsclients: ' + npsclients[0].name + ' ' + npsclients[0].body);
+  console.log('JSON.stringified npsclients: ' + JSON.stringify(npsclients));
+
+  return JSON.stringify(npsclients);
 }
 
 module.exports = router;

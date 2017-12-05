@@ -25,6 +25,7 @@ import { MyMaterialModule} from '../my-material.module';
 import { PresentationModule} from './presentation/presentation.module';
 
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import { NpsClientComponent } from './nps-client/nps-client.component';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -47,6 +48,10 @@ const appRoutes: Routes = [
   {
     path: 'elements',
     component: ElementsComponent
+  },
+  {
+    path: 'npsclients',
+    component: DeckComponent
   },
   {
     path: 'deck',
