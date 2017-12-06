@@ -1,0 +1,29 @@
+<div style="padding-left: 2em;">
+  <div class="example-container mat-elevation-z8" style="width: 90%;">
+    <mat-table #table [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let npsclient"> {{npsclient.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="department">
+        <mat-header-cell *matHeaderCellDef>Department</mat-header-cell>
+        <mat-cell *matCellDef="let npsclient"> {{npsclient.department}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="schedule">
+        <mat-header-cell *matHeaderCellDef>Schedule</mat-header-cell>
+        <mat-cell *matCellDef="let npsclient"> {{npsclient.schedule}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="relationshipManager">
+        <mat-header-cell *matHeaderCellDef>Relationship Manager</mat-header-cell>
+        <mat-cell *matCellDef="let npsclient"> {{npsclient.relationshipManager}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns" [ngClass]="{'highlight': selectedRowIndex == row}"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>
