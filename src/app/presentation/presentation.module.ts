@@ -31,7 +31,7 @@ import { NpsScheduleComponent } from '../nps-schedule/nps-schedule.component';
     DeckComponent,
     SlideComponent,
     NpsScheduleComponent],
-  entryComponents: [HeroJobAdComponent, HeroProfileComponent],
+  entryComponents: [HeroJobAdComponent, HeroProfileComponent, NpsScheduleComponent],
   exports: [HomeComponent],
   providers: [AdService, SlideService, NpsClientsService, NpsClientsDataService],
   schemas: [NO_ERRORS_SCHEMA]

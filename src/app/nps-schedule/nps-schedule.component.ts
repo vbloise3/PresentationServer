@@ -8,7 +8,7 @@ import {SlideService} from '../slide.service';
   styleUrls: ['./nps-schedule.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class NpsScheduleComponent implements OnInit {
+export class NpsScheduleComponent implements AdComponent, OnInit {
 
   slideTitle: String;
   @Input() data: any;

@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.loadComponent();
-    this.getAds();
+    this.getAds2();
   }
 
   ngOnDestroy() {
@@ -51,6 +51,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.interval = setInterval(() => {
       this.loadComponent();
     }, 3000);
+  }
+
+  getAds2() {
+      this.loadComponent();
   }
 
   ngOnInit(): void {

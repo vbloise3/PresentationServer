@@ -27,7 +27,7 @@ export class AdService {
 
   getSlides(presentationName, numberOfSlides) {
     return [
-      new AdItem(NpsScheduleComponent, presentationName, (numberOfSlides - 2).toString(), {headline: 'Hiring for several positions',
+      new AdItem(NpsScheduleComponent, presentationName, (numberOfSlides - 0).toString(), {headline: 'Hiring for several positions',
         body: 'Submit your resume today!'}),
     ];
   }

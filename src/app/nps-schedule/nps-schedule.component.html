@@ -1,11 +1,19 @@
-<app-home [presentationName]="'firstPresentation'" [numberOfSlides]="'1'"></app-home>
-<app-slide>
-  <slide-title>
-    {{slideTitle}}
-  </slide-title>
-  <slide-content>
-    <mat-card class="shadowCard">
-      <app-nps-client></app-nps-client>
-    </mat-card>
-  </slide-content>
-</app-slide>
+<div class="job-ad">
+  <h4>{{data.headline}}</h4>
+
+  {{data.body}}
+
+  <p>directory: {{directory}}; slide: {{slide}}</p>
+
+  <div [innerHtml]="myTemplate"></div>
+  <app-slide>
+    <slide-title>
+      {{directory}} - {{slide}}
+    </slide-title>
+    <slide-content>
+      <mat-card class="shadowCard">
+        <app-nps-client></app-nps-client>
+      </mat-card>
+    </slide-content>
+  </app-slide>
+</div>
