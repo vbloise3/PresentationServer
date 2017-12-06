@@ -18,6 +18,7 @@ import { NpsClientsDataService } from '../services/nps-clients-data.service';
 import { NpsClientComponent } from '../nps-client/nps-client.component';
 
 import { AgWordCloudModule} from 'angular4-word-cloud';
+import { NpsScheduleComponent } from '../nps-schedule/nps-schedule.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { AgWordCloudModule} from 'angular4-word-cloud';
   declarations: [HomeComponent, AdComponent, AdDirective, HeroJobAdComponent, HeroProfileComponent, InnerTestComponent, ElementsComponent,
     NpsClientComponent,
     DeckComponent,
-    SlideComponent],
+    SlideComponent,
+    NpsScheduleComponent],
   entryComponents: [HeroJobAdComponent, HeroProfileComponent],
   exports: [HomeComponent],
   providers: [AdService, SlideService, NpsClientsService, NpsClientsDataService],

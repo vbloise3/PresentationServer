@@ -8,12 +8,13 @@ import { AdService } from '../ad.service';
 
 @Component({
   selector: 'app-deck',
-  templateUrl: './deck.component.html',
+  templateUrl: './deck.component2.html',
   styleUrls: ['./deck.component.css']
 })
 export class DeckComponent implements OnInit {
 
   presentationName: String;
+  slideTitle: String;
   isDarkTheme = false;
 
   wordData: Array<AgWordCloudData> = [
@@ -59,6 +60,7 @@ export class DeckComponent implements OnInit {
 
   constructor() {
     this.presentationName = 'First Attempt at Content Projection!';
+    this.slideTitle = 'NPS Client Schedule \u2014 GIOS 2018';
   }
 
   ngOnInit(): void {

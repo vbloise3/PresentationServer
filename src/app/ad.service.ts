@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HeroJobAdComponent } from './hero-job-ad/hero-job-ad.component';
 import { HeroProfileComponent } from './hero-profile/hero-profile.component';
+import { NpsScheduleComponent } from './nps-schedule/nps-schedule.component';
 import { AdItem } from './ad-item';
 
 @Injectable()
@@ -21,6 +22,13 @@ export class AdService {
 
       new AdItem(HeroJobAdComponent, presentationName, (numberOfSlides - 0).toString(), {headline: 'I did it!!',
         body: 'Deck and slides next!!'}),
+    ];
+  }
+
+  getSlides(presentationName, numberOfSlides) {
+    return [
+      new AdItem(NpsScheduleComponent, presentationName, (numberOfSlides - 2).toString(), {headline: 'Hiring for several positions',
+        body: 'Submit your resume today!'}),
     ];
   }
 }

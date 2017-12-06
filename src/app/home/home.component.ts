@@ -54,7 +54,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.ads = this.adService.getAds(this.presentationName, this.numberOfSlides);
+    this.ads = this.adService.getSlides(this.presentationName, this.numberOfSlides);
+    // was this.ads = this.adService.getAds(this.presentationName, this.numberOfSlides);
     /*this.generateData();*/
     /*this.interval = setInterval(() => {
       this.generateData();
