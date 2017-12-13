@@ -22,7 +22,7 @@ let IElement = interface.implements({Position: '', Name: '', Weight: '', Symbol:
 //
 
 // Create the INpsclient Interface :)
-let INpsclient = interface.implements({Name: '', Department: '', Schedule: '', RelationshipOwner: ''});
+let INpsclient = interface.implements({Name: '', Department: '', Schedule: '', RelationshipManager: ''});
 //
 
 let posts = new Array(IPost);
@@ -315,7 +315,7 @@ router.route('/npsclients')
     npsclient.Name = req.body.name;  // set the elements title (comes from the request)
     npsclient.Department = req.body.department;  // set the elements body (comes from the request)
     npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
-    npsclient.RelationshipOwner = req.body.relationshipOwner;  // set the elements id (comes from the request)
+    npsclient.RelationshipManager = req.body.relationshipManager;  // set the elements id (comes from the request)
 
     npsclient.save(function(err) {
       if (err)
@@ -362,7 +362,7 @@ router.route('/npsclients/:npsclient_id')
       npsclient.Namw = req.body.name;
       npsclient.Department = req.body.department;  // set the elements body (comes from the request)
       npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
-      npsclient.RelationshipOwner = req.body.relationshipOwner;
+      npsclient.RelationshipManager = req.body.relationshipManager;
 
       npsclient.save(function(err) {
         if (err)
@@ -395,7 +395,7 @@ function getOneNpsclient(fileName) {
       name: npsclient.Name,
       department: npsclient.Department,
       weight: npsclient.Schedule,
-      symbol: npsclient.RelationshipOwner
+      symbol: npsclient.RelationshipManager
     };
   });
   console.log(npsclients.length + ' npsclients loaded at ' + new Date());

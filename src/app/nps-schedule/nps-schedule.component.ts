@@ -10,7 +10,8 @@ import {SlideService} from '../slide.service';
 })
 export class NpsScheduleComponent implements AdComponent, OnInit {
 
-  slideTitle: String;
+  slideTitle: string;
+  tableTitle: string;
   @Input() data: any;
   @Input() directory: string;
   @Input() slide: string;
@@ -18,6 +19,7 @@ export class NpsScheduleComponent implements AdComponent, OnInit {
 
   constructor(public slideService: SlideService) {
     this.slideTitle = 'NPS Client Schedule \u2014 GIOS 2018';
+    this.tableTitle = 'GIOS NPS Schedule - 2018';
   }
 
   ngOnInit() {

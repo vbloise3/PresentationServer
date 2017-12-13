@@ -9,7 +9,7 @@ export interface NpsClient {
   name: string;
   department: string;
   schedule: string;
-  relationshipOwner: string;
+  relationshipManager: string;
 }
 
 @Injectable()
