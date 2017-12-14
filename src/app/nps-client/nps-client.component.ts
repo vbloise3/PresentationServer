@@ -23,6 +23,12 @@ export class NpsClientComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource3.filter = filterValue;
+  }
+
   /* set the sort after the view init since this component will be able to query its view for the initialized sort */
 
   ngAfterInit() {
