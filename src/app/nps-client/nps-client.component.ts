@@ -4,7 +4,9 @@ import { NpsClientsService } from '../services/nps-clients.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { NpsClientsDataService, NpsClient } from '../services/nps-clients-data.service';
+import {TableDataService} from '../services/table-data.service';
 
 @Component({
   selector: 'app-nps-client',
@@ -23,7 +25,18 @@ export class NpsClientComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
+  update(el: NpsClient, name: string) {
+    // alert(name);
+    if (name == null) { return; }
+    // copy and mutate
+    const copy = this.dataSource3.data2().slice();
+    // alert(copy[0].name);
+    el.name = name;
+    this.dataSource3.update(copy);
+  }
+
   applyFilter(filterValue: string) {
+    // alert(filterValue);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource3.filter = filterValue;
@@ -32,7 +45,7 @@ export class NpsClientComponent implements OnInit {
   /* set the sort after the view init since this component will be able to query its view for the initialized sort */
 
   ngAfterInit() {
-    this.dataSource.sort = this.sort;
+    this.dataSource3.sort = this.sort;
   }
 
   constructor(private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
@@ -41,7 +54,8 @@ export class NpsClientComponent implements OnInit {
       // this.stuff = Observable.of(data);
       // this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
       // this.dataSource3 = new MatDataTableSource(data);
-      this.dataSource3 = new MatTableDataSource(data);
+      // this.dataSource3 = new MatTableDataSource(data);
+      this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
       this.dataSource3.sort = this.sort;
     });
   }
@@ -56,30 +70,31 @@ export class NpsClientComponent implements OnInit {
 
 let data: NpsClient[];
 
-/*export class ExampleDataSource extends DataSource<any> {
-  service: NpsClientsDataService;
-  elements: Array<NpsClient>;
-  stuff: Observable<NpsClient[]>;
+export class ExampleDataSource extends MatTableDataSource<any> {
+  private dataSubject = new BehaviorSubject<NpsClient[]>([]);
 
-  constructor (service: NpsClientsDataService, theData: Observable<NpsClient[]>) {
-    super();
-    this.service = service;
-    this.stuff = theData;
+  data2() {
+    return this.dataSubject.value;
   }
 
-  public loadTheNpsClients() {
-    this.service.get2().subscribe(dataReceived => {
-      data = dataReceived;
-    });
+  update(data2) {
+    this.dataSubject.next(data2);
+    // alert('trying to call TableDataService ' + this.dataSubject.getValue()[0].name);
+    this.tableDataservice.save(this.dataSubject.getValue()[0]);
   }
 
-  // Connect function called by the table to retrieve one stream containing the data to render
-  connect(): Observable<NpsClient[]> {
-    return this.stuff;
+  constructor(public tableDataservice: NpsClientsDataService, data2: any[]) {
+    super(data2);
+    this.dataSubject.next(data2);
   }
+
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  /*connect(): Observable<NpsClient[]> {
+    return this.dataSubject;
+  }*/
 
   disconnect() {}
-}*/
+}
 
 const NPSCLIENT_DATA: NpsClient[] = [
   {name: 'dfgdfg', department: 'ghjrdgj', schedule: 'sdfgdsg', relationshipManager: 'sdfsd'},

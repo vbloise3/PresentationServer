@@ -6,7 +6,7 @@ let npsClients: Array<NpsClient>;
 const service = '/api/npsClients';
 
 export interface NpsClient {
-  name: string;
+  name?: string;
   department: string;
   schedule: string;
   relationshipManager: string;
@@ -30,6 +30,11 @@ export class NpsClientsDataService {
 
   get2(): any {
     return this.http.get<NpsClient[]>(service);
+  }
+
+  save(npsclient) {
+    alert('about to save ' + npsclient.name);
+    this.http.put('/api/npsclients', npsclient);
   }
 
   add(npsClient) {

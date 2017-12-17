@@ -19,3 +19,11 @@
 }
 
 .div-table-body { height: 600px; overflow-x: auto; overflow-y: scroll;}
+
+.mat-cell.mat-column-comment {
+  cursor: pointer;
+}
+
+.add-comment {
+  opacity: 0.4;
+}

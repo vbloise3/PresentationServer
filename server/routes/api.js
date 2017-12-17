@@ -354,12 +354,13 @@ router.route('/npsclients/:npsclient_id')
 
   // update the npsclients with this id
   .put(function(req, res) {
+    console.log('putting! ' + req.body.name);
     Npsclient.findById(req.params.npsclient_id, function(err, npsclient) {
 
       if (err)
         res.send(err);
 
-      npsclient.Namw = req.body.name;
+      npsclient.Name = req.body.name;
       npsclient.Department = req.body.department;  // set the elements body (comes from the request)
       npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
       npsclient.RelationshipManager = req.body.relationshipManager;

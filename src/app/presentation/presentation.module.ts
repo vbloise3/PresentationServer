@@ -19,18 +19,31 @@ import { NpsClientComponent } from '../nps-client/nps-client.component';
 
 import { AgWordCloudModule} from 'angular4-word-cloud';
 import { NpsScheduleComponent } from '../nps-schedule/nps-schedule.component';
+import { InlineEditComponent } from '../inline-edit/inline-edit.component';
+import { SatPopoverModule } from '@ncstate/sat-popover';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HeaderComponent } from '../header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     CommonModule,
     MyMaterialModule,
+    SatPopoverModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AgWordCloudModule.forRoot()
   ],
   declarations: [HomeComponent, AdComponent, AdDirective, HeroJobAdComponent, HeroProfileComponent, InnerTestComponent, ElementsComponent,
     NpsClientComponent,
     DeckComponent,
     SlideComponent,
-    NpsScheduleComponent],
+    NpsScheduleComponent,
+    InlineEditComponent,
+    HeaderComponent],
   entryComponents: [HeroJobAdComponent, HeroProfileComponent, NpsScheduleComponent],
   exports: [HomeComponent],
   providers: [AdService, SlideService, NpsClientsService, NpsClientsDataService],

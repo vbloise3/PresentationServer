@@ -27,8 +27,6 @@ import { PresentationModule} from './presentation/presentation.module';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import { NpsClientComponent } from './nps-client/nps-client.component';
 
-import { Injectable} from '@angular/core';
-import { BaseRequestOptions, Headers, RequestOptions} from '@angular/http';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -68,14 +66,6 @@ const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
-@Injectable()
-export class CustomRequestOptions extends BaseRequestOptions {
-  headers = new Headers ({
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
-    'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
-  });
-}
 
 @NgModule({
   declarations: [
@@ -98,7 +88,7 @@ export class CustomRequestOptions extends BaseRequestOptions {
     )
   ],
   entryComponents: [  ],
-  providers: [PostsService, ElementsService, TableDataService, { provide: RequestOptions, useClass: CustomRequestOptions }],
+  providers: [PostsService, ElementsService, TableDataService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
