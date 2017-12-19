@@ -49,3 +49,6 @@ db.elements.insert({position:"10",name:"Neon",weight:"20.1797",symbol:"Ne"})
 Add some Npsclients:
 db.npsclients.insert({name:"Jane Wagner", department: "Securities Lending", schedule: "2nd Half", relationshipManager: "Vince Bloise"})
 db.npsclients.insert({name:"Jim Kearney", department: "Investment Ops", schedule: "1st Half", relationshipOwner: "Andy Lazzaro"})
+
+DeleteOne:
+db.npsclients.deleteOne({_id:ObjectId("5a3867d1eaeb5809ca2c87f1")})

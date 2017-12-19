@@ -2,6 +2,7 @@ var fs = require('fs');
 var parse = require('csv-parse/lib/sync');
 var path = require('path');
 var interface = require('../modules/interface').interface;
+var bodyParser = require('body-parser');
 const url = require('url');
 const querystring = require('querystring');
 // Interface = require('../modules/interfaceES6');
@@ -9,6 +10,11 @@ const querystring = require('querystring');
 
 const express = require('express');
 const router = express.Router();
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // declare axios for making http requests
 const axios = require('axios');
@@ -22,7 +28,7 @@ let IElement = interface.implements({Position: '', Name: '', Weight: '', Symbol:
 //
 
 // Create the INpsclient Interface :)
-let INpsclient = interface.implements({Name: '', Department: '', Schedule: '', RelationshipManager: ''});
+let INpsclient = interface.implements({name: '', department: '', schedule: '', relationshipManager: ''});
 //
 
 let posts = new Array(IPost);
@@ -306,22 +312,24 @@ function getOneElement(fileName) {
   return JSON.stringify(elements);
 }
 
+/*----------------------------------------------------------------------------------*/
 // Npsclient routes
 router.route('/npsclients')
 // create a npsclients (accessed at POST http://localhost:8080/npsclients)
   .post(function(req, res) {
 
+    // console.log("creating an npsclient: " + req.body.relationshipManager);
     var npsclient = new Npsclient();		// create a new instance of the Element model
-    npsclient.Name = req.body.name;  // set the elements title (comes from the request)
-    npsclient.Department = req.body.department;  // set the elements body (comes from the request)
-    npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
-    npsclient.RelationshipManager = req.body.relationshipManager;  // set the elements id (comes from the request)
+    npsclient.name = req.body.name;  // set the elements title (comes from the request)
+    npsclient.department = req.body.department;  // set the elements body (comes from the request)
+    npsclient.schedule = req.body.schedule;  // set the elements userId (comes from the request)
+    npsclient.relationshipManager = req.body.relationshipManager;  // set the elements id (comes from the request)
 
     npsclient.save(function(err) {
       if (err)
         res.send(err);
 
-      res.json({ message: 'Npsclient created!' });
+      res.json({ message: 'Npsclient added to the database!', data: npsclient});
     });
 
 
@@ -346,6 +354,8 @@ router.route('/npsclients/:npsclient_id')
 // get the npsclients with that id
   .get(function(req, res) {
     Npsclient.findById(req.params.npsclient_id, function(err, npsclient) {
+      // console.log("got client: " + npsclient._id);
+      // console.log("got client schedule: " + npsclient._id);
       if (err)
         res.send(err);
       res.json(npsclient);
@@ -354,16 +364,16 @@ router.route('/npsclients/:npsclient_id')
 
   // update the npsclients with this id
   .put(function(req, res) {
-    console.log('putting! ' + req.body.name);
+    // console.log('putting! ' + req.params.npsclient_id);
     Npsclient.findById(req.params.npsclient_id, function(err, npsclient) {
 
       if (err)
         res.send(err);
 
-      npsclient.Name = req.body.name;
-      npsclient.Department = req.body.department;  // set the elements body (comes from the request)
-      npsclient.Schedule = req.body.schedule;  // set the elements userId (comes from the request)
-      npsclient.RelationshipManager = req.body.relationshipManager;
+      npsclient.name = req.body.name;
+      npsclient.department = req.body.department;  // set the elements body (comes from the request)
+      npsclient.schedule = req.body.schedule;  // set the elements userId (comes from the request)
+      npsclient.relationshipManager = req.body.relationshipManager;
 
       npsclient.save(function(err) {
         if (err)
@@ -393,10 +403,10 @@ function getOneNpsclient(fileName) {
 
   npsclients = parse(csv, {columns: true}).map(npsclient => {
     return {
-      name: npsclient.Name,
-      department: npsclient.Department,
-      weight: npsclient.Schedule,
-      symbol: npsclient.RelationshipManager
+      name: npsclient.name,
+      department: npsclient.department,
+      weight: npsclient.schedule,
+      symbol: npsclient.relationshipManager
     };
   });
   console.log(npsclients.length + ' npsclients loaded at ' + new Date());

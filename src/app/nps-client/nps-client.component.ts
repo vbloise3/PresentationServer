@@ -32,7 +32,7 @@ export class NpsClientComponent implements OnInit {
     const copy = this.dataSource3.data2().slice();
     // alert(copy[0].name);
     el.name = name;
-    this.dataSource3.update(copy);
+    this.dataSource3.update(el, copy);
   }
 
   applyFilter(filterValue: string) {
@@ -77,10 +77,11 @@ export class ExampleDataSource extends MatTableDataSource<any> {
     return this.dataSubject.value;
   }
 
-  update(data2) {
+  update(theNpsclient, data2) {
     this.dataSubject.next(data2);
-    // alert('trying to call TableDataService ' + this.dataSubject.getValue()[0].name);
-    this.tableDataservice.save(this.dataSubject.getValue()[0]);
+    // alert('trying to call TableDataService ' + theNpsclient.name);
+    // this.tableDataservice.save(this.dataSubject.getValue()[0]);
+    this.tableDataservice.save(theNpsclient);
   }
 
   constructor(public tableDataservice: NpsClientsDataService, data2: any[]) {

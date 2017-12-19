@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { map } from 'rxjs/operators';
 
 let npsClients: Array<NpsClient>;
-const service = '/api/npsClients';
+const service = '/api/npsclients';
 
 export interface NpsClient {
   name?: string;
@@ -33,8 +34,22 @@ export class NpsClientsDataService {
   }
 
   save(npsclient) {
-    alert('about to save ' + npsclient.name);
-    this.http.put('/api/npsclients', npsclient);
+    // alert('about to save ' + npsclient._id);
+    const url = service + '/' + npsclient._id;
+    const body = JSON.stringify(npsclient);
+    this.http.put(url, {
+      'name': npsclient.name,
+      'department': npsclient.department,
+      'schedule': npsclient.schedule,
+      'relationshipManager': npsclient.relationshipManager
+    }).subscribe(
+      dataOut => {
+        console.log('PUT Request is successful ', dataOut);
+      },
+      error => {
+        console.log('Error', error);
+      }
+    );
   }
 
   add(npsClient) {
