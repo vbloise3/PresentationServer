@@ -25,13 +25,21 @@ export class NpsClientComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  update(el: NpsClient, name: string) {
+  update(el: NpsClient, position: string, name: string) {
     // alert(name);
     if (name == null) { return; }
     // copy and mutate
     const copy = this.dataSource3.data2().slice();
     // alert(copy[0].name);
-    el.name = name;
+    if ( position === 'name') {
+      el.name = name;
+    } else if ( position === 'department') {
+      el.department = name;
+    } else if ( position === 'schedule') {
+      el.schedule = name;
+    } else if ( position === 'relationshipManager') {
+      el.relationshipManager = name;
+    }
     this.dataSource3.update(el, copy);
   }
 

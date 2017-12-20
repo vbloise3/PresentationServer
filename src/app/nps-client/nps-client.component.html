@@ -8,7 +8,7 @@
       </mat-form-field>
     </div>
     <mat-table #table [dataSource]="dataSource3" matSort>
-      <!-- Position Column -->
+      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
         <mat-cell class="mat-column-comment" *matCellDef="let npsclient" [satPopoverAnchorFor]="p" (click)="p.open()">
@@ -23,25 +23,68 @@
                        hasBackdrop
                        xPosition="after"
                        yPosition="below"
-                       (closed)="update(npsclient, $event)">
-            <app-inline-edit [value]="npsclient.name"></app-inline-edit>
+                       (closed)="update(npsclient, 'name', $event)">
+            <app-inline-edit [value]="npsclient.name" [title]="'Change Name'"></app-inline-edit>
           </sat-popover>
         </mat-cell>
       </ng-container>
-
+      <!-- Department Column -->
       <ng-container matColumnDef="department">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
-        <mat-cell *matCellDef="let npsclient"> {{npsclient.department}}</mat-cell>
-      </ng-container>
+        <mat-cell class="mat-column-comment" *matCellDef="let npsclient" [satPopoverAnchorFor]="p" (click)="p.open()">
+          <ng-container *ngIf="npsclient.department">
+            {{npsclient.department}}
+          </ng-container>
+            <span class="add-comment" *ngIf="!npsclient.department">
+              Change Department
+            </span>
 
+            <sat-popover #p
+                         hasBackdrop
+                         xPosition="after"
+                         yPosition="below"
+                         (closed)="update(npsclient, 'department', $event)">
+              <app-inline-edit [value]="npsclient.department" [title]="'Change Department'"></app-inline-edit>
+            </sat-popover>
+          </mat-cell>
+      </ng-container>
+      <!-- Schedule Column -->
       <ng-container matColumnDef="schedule">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Schedule</mat-header-cell>
-        <mat-cell *matCellDef="let npsclient"> {{npsclient.schedule}}</mat-cell>
-      </ng-container>
+        <mat-cell class="mat-column-comment" *matCellDef="let npsclient" [satPopoverAnchorFor]="p" (click)="p.open()">
+          <ng-container *ngIf="npsclient.schedule">
+            {{npsclient.schedule}}
+          </ng-container>
+          <span class="add-comment" *ngIf="!npsclient.schedule">
+              Change Schedule
+            </span>
 
+          <sat-popover #p
+                       hasBackdrop
+                       xPosition="after"
+                       yPosition="below"
+                       (closed)="update(npsclient, 'schedule', $event)">
+            <app-inline-edit [value]="npsclient.schedule" [title]="'Change Schedule'"></app-inline-edit>
+          </sat-popover>
+        </mat-cell>
+      </ng-container>
+      <!-- RelationshipManager Column -->
       <ng-container matColumnDef="relationshipManager">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Relationship Manager</mat-header-cell>
-        <mat-cell *matCellDef="let npsclient"> {{npsclient.relationshipManager}}</mat-cell>
+        <mat-cell class="mat-column-comment" *matCellDef="let npsclient" [satPopoverAnchorFor]="p" (click)="p.open()">
+          {{npsclient.relationshipManager}}
+          <span class="add-comment" *ngIf="!npsclient.relationshipManager">
+              Change Relationship Manager
+            </span>
+
+          <sat-popover #p
+                       hasBackdrop
+                       xPosition="after"
+                       yPosition="below"
+                       (closed)="update(npsclient, 'relationshipManager', $event)">
+            <app-inline-edit [value]="npsclient.relationshipManager" [title]="'Change Relationship Manager'"></app-inline-edit>
+          </sat-popover>
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns" [ngClass]="{'highlight': selectedRowIndex == row}"></mat-header-row>

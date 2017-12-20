@@ -5,9 +5,10 @@ import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-inline-edit',
   styleUrls: ['./inline-edit.component.scss'],
-  template: `
+  templateUrl: './inline-edit.component.html'
+      /*`
     <form (ngSubmit)="onSubmit()">
-      <div class="mat-subheading-2">Change Name</div>
+      <div class="mat-subheading-2">{{heading}}</div>
 
       <mat-form-field>
         <input matInput maxLength="140" name="name" [(ngModel)]="name" value="{{name}}">
@@ -19,7 +20,7 @@ import 'rxjs/add/operator/filter';
         <button mat-button type="submit" color="primary">SAVE</button>
       </div>
     </form>
-  `
+  `*/
 })
 export class InlineEditComponent implements OnInit {
 
@@ -30,9 +31,17 @@ export class InlineEditComponent implements OnInit {
     this.name = this._value = x;
   }
   private _value = '';
+  @Input()
+    get title(): string { return this._title; }
+    set title(x: string) {
+      this.heading = this._title = x;
+    }
+  private _title = '';
 
   /** Form model for the input. */
   name = '';
+  heading = '';
+  returnValue = '';
 
   constructor(@Optional() @Host() public popover: SatPopover) { }
 
@@ -41,7 +50,7 @@ export class InlineEditComponent implements OnInit {
     if (this.popover) {
       this.popover.closed
         .filter(val => val == null)
-        .subscribe(() => this.name = this.value || '');
+        .subscribe(() => { this.name = this.value || ''; this.heading = this.title || ''; } );
     }
   }
 
