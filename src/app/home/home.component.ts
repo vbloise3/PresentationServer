@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { AdDirective } from '../ad.directive';
 import { AdItem } from '../ad-item';
@@ -10,7 +10,7 @@ import { AdService } from '../ad.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HomeComponent implements OnInit, /*AfterViewInit,*/ AfterContentInit, OnDestroy {
   @Input() ads: AdItem[];
   @Input() presentationName = 'yose';
   @Input() numberOfSlides = '0';
@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
               private adService: AdService) {
   }
 
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
+  ngAfterContentInit() {
     this.loadComponent();
     this.getAds2();
   }

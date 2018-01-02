@@ -19,7 +19,7 @@ export class NpsScheduleComponent implements AdComponent, OnInit {
 
   constructor(public slideService: SlideService) {
     this.slideTitle = 'NPS Client Schedule \u2014 GIOS 2018';
-    this.tableTitle = 'GIOS NPS Schedule - 2018';
+    this.tableTitle = 'NPS Survey Candidates by Half';
   }
 
   ngOnInit() {
