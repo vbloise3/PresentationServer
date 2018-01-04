@@ -25,3 +25,11 @@
   margin-top: 8px;
   margin-right: -16px;
 }
+
+.cancel-button ::ng-deep .mat-button-focus-overlay {
+  background-color:transparent;
+}
+
+.mat-button:not([disabled]):hover {
+  background-color: rgba(158, 158, 158, 0.2);
+}

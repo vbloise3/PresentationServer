@@ -52,6 +52,7 @@ export class InlineEditComponent implements OnInit {
         .filter(val => val == null)
         .subscribe(() => { this.name = this.value || ''; this.heading = this.title || ''; } );
     }
+    // alert('delete? ' + this.heading.slice(0, 6));
   }
 
   onSubmit() {

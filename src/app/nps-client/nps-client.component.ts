@@ -18,7 +18,7 @@ export class NpsClientComponent implements OnInit {
   // instantiate npsclients to an empty array
   // npsclinets: Array<NpsClient>;
   // stuff: Observable<any>;
-  displayedColumns = ['name', 'department', 'schedule', 'relationshipManager'];
+  displayedColumns = ['name', 'department', 'schedule', 'relationshipManager', 'actions'];
   // displayedColumns = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource3: any; // = new MatTableDataSource(data);
@@ -44,24 +44,57 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.update(el, copy);
   }
 
-  insert(position: string, name: string) {
-    // alert(name);
+  delete(el: NpsClient, position: string, theNewNpsClient: NpsClient) {
+    const copy = this.dataSource3.data2().slice();
+    if (theNewNpsClient == null) { return; }
+    this.dataSource3.delete(el, copy);
+    // retrieve the newly updated table data
+    this.tableDataservice.get2().subscribe(dataRecieved => {
+      data = dataRecieved;
+      // this.stuff = Observable.of(data);
+      // this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
+      // this.dataSource3 = new MatDataTableSource(data);
+      // this.dataSource3 = new MatTableDataSource(data);
+      this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+      this.dataSource3.sort = this.sort;
+    });
+    // end retrieve newly updated table data
+  }
+
+  insert(position: string, theNewNpsClient: NpsClient) {
+    // alert(theNewNpsClient);
     let npsclient: NpsClient;
     npsclient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' '};
-    if (name == null) { return; }
+    if (theNewNpsClient == null) { return; }
     // copy and mutate
     const copy = this.dataSource3.data2().slice();
     // alert(copy[0].name);
-    if ( position === 'name') {
-      npsclient.name = name;
+    if ( position === 'all' ) {
+      npsclient.name = theNewNpsClient.name;
+      npsclient.department = theNewNpsClient.department;
+      npsclient.schedule = theNewNpsClient.schedule;
+      npsclient.relationshipManager = theNewNpsClient.relationshipManager;
+    } else if ( position === 'name') {
+      npsclient.name = theNewNpsClient.name;
     } else if ( position === 'department') {
-      npsclient.department = name;
+      npsclient.department = theNewNpsClient.department;
     } else if ( position === 'schedule') {
-      npsclient.schedule = name;
+      npsclient.schedule = theNewNpsClient.schedule;
     } else if ( position === 'relationshipManager') {
-      npsclient.relationshipManager = name;
+      npsclient.relationshipManager = theNewNpsClient.relationshipManager;
     }
     this.dataSource3.insert(npsclient, copy);
+    // retrieve the newly updated table data
+    this.tableDataservice.get2().subscribe(dataRecieved => {
+      data = dataRecieved;
+      // this.stuff = Observable.of(data);
+      // this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
+      // this.dataSource3 = new MatDataTableSource(data);
+      // this.dataSource3 = new MatTableDataSource(data);
+      this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+      this.dataSource3.sort = this.sort;
+    });
+    // end retrieve newly updated table data
   }
 
   applyFilter(filterValue: string) {
@@ -117,6 +150,11 @@ export class ExampleDataSource extends MatTableDataSource<any> {
     this.dataSubject.next(data2);
     this.tableDataservice.insert(theNpsclient);
   }
+
+  delete(theNpsclient, data2) {
+  this.dataSubject.next(data2);
+  this.tableDataservice.delete(theNpsclient);
+}
 
   constructor(public tableDataservice: NpsClientsDataService, data2: any[]) {
     super(data2);

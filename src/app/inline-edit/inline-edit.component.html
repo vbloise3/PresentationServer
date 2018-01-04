@@ -1,13 +1,14 @@
 <form (ngSubmit)="onSubmit()">
   <div class="mat-subheading-2">{{heading}}</div>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="heading.slice(0, 6) != 'Delete'">
     <input matInput maxLength="140" name="name" [(ngModel)]="name" value="{{name}}">
     <mat-hint align="end">{{name?.length || 0}}/140</mat-hint>
   </mat-form-field>
 
   <div class="actions">
-    <button mat-button type="button" color="primary" (click)="onCancel()">CANCEL</button>
-    <button mat-button type="submit" color="primary">SAVE</button>
+    <button mat-button type="button" class="cancel-button" color="primary" (click)="onCancel()">CANCEL</button>
+    <button *ngIf="heading.slice(0, 6) != 'Delete'" mat-button type="submit" color="primary">SAVE</button>
+    <button *ngIf="heading.slice(0, 6) == 'Delete'" mat-button type="submit" color="primary">DELETE</button>
   </div>
 </form>

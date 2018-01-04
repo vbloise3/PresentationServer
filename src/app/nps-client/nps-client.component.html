@@ -86,6 +86,24 @@
           </sat-popover>
         </mat-cell>
       </ng-container>
+      <!-- actions column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+        <mat-cell class="mat-column-comment" *matCellDef="let npsclient">
+          <!-- delete button -->
+          <span class="app-action" [class.m2app-dark]="isDarkTheme">
+            <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconRed">delete outline</mat-icon></button>
+              <sat-popover #p
+                           hasBackdrop
+                           xPosition="after"
+                           yPosition="below"
+                           (closed)="delete(npsclient, 'all', $event)">
+                <app-inline-edit [value]="npsclient" [title]="'Delete ' + npsclient.name + '?'"></app-inline-edit>
+              </sat-popover>
+            </span>
+          <!-- end delete button -->
+        </mat-cell>
+      </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns" [ngClass]="{'highlight': selectedRowIndex == row}"></mat-header-row>
       <mat-row *matRowDef="let npsclient; columns: displayedColumns;"></mat-row>
@@ -96,8 +114,8 @@
                    hasBackdrop
                    xPosition="after"
                    yPosition="below"
-                   (closed)="insert('schedule', $event)">
-            <app-inline-insert [value]="Test" [title]="'Change Schedule'"></app-inline-insert>
+                   (closed)="insert('all', $event)">
+            <app-inline-insert [value]="''" [value2]="''" [value3]="''" [value4]="''" [title]="'Add New NPS Client'"></app-inline-insert>
           </sat-popover>
     </span>
   </div>

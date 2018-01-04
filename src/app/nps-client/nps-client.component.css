@@ -35,9 +35,51 @@
   z-index: 5;
 }
 
+.iconRed {
+  position: relative;
+  color: red;
+  bottom: -0.4em;
+  z-index: 5;
+}
+
+.mat-fab.mat-small {
+  min-width: 10%;
+}
+
+.material-icons.md-12 { font-size: 12px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.iconWhiteSmall {
+  position: relative;
+  color: white;
+  bottom: 0.05em;
+  left: -0.3em;
+  z-index: 5;
+}
+
 .buttonPositionTop {
   position: fixed;
   z-index: 5;
   bottom:20%;
-  right:20%;
+  right:10%;
+}
+
+button:focus {
+  outline:0;
+}
+
+button.launch {
+  outline:0;
+}
+
+button.change {
+  outline:0;
+}
+
+button:active {
+  outline: none;
+  border: none;
 }

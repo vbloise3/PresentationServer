@@ -2,8 +2,23 @@
   <div class="mat-subheading-2">{{heading}}</div>
 
   <mat-form-field>
-    <input matInput maxLength="140" name="name" [(ngModel)]="name" value="{{name}}">
+    <input matInput placeholder="Name" maxLength="140" name="name" [(ngModel)]="name">
     <mat-hint align="end">{{name?.length || 0}}/140</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Department" maxLength="140" name="department" [(ngModel)]="department" >
+    <mat-hint align="end">{{department?.length || 0}}/140</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Schedule" maxLength="140" name="schedule" [(ngModel)]="schedule" >
+    <mat-hint align="end">{{schedule?.length || 0}}/140</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Relationship Manager" maxLength="140" name="reslationshipManager" [(ngModel)]="relationshipManager" >
+    <mat-hint align="end">{{reslationshipManager?.length || 0}}/140</mat-hint>
   </mat-form-field>
 
   <div class="actions">

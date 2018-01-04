@@ -77,6 +77,18 @@ export class NpsClientsDataService {
     );
   }
 
+  delete(npsclient) {
+    const url = service + '/' + npsclient._id;
+    this.http.delete(url).subscribe(
+      dataOut => {
+        console.log('DELETE Request is successful ', dataOut);
+      },
+      error => {
+        console.log('Error', error);
+      }
+    );
+  }
+
   add(npsClient) {
     // npsclients.push(npsClient);
     return this.get();
