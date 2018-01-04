@@ -58,6 +58,25 @@ export class NpsClientsDataService {
     );
   }
 
+  insert(npsclient) {
+    // alert('about to insert ' + npsclient._id);
+    const url = service; // + '/' + npsclient._id;
+    const body = JSON.stringify(npsclient);
+    this.http.post(url, {
+      'name': npsclient.name,
+      'department': npsclient.department,
+      'schedule': npsclient.schedule,
+      'relationshipManager': npsclient.relationshipManager
+    }).subscribe(
+      dataOut => {
+        console.log('PUT Request is successful ', dataOut);
+      },
+      error => {
+        console.log('Error', error);
+      }
+    );
+  }
+
   add(npsClient) {
     // npsclients.push(npsClient);
     return this.get();

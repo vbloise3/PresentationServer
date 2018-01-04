@@ -25,6 +25,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from '../header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import { DialogContent } from '../nps-client/nps-client.component';
 
 @NgModule({
   imports: [
@@ -43,8 +44,9 @@ import {BrowserModule} from '@angular/platform-browser';
     SlideComponent,
     NpsScheduleComponent,
     InlineEditComponent,
-    HeaderComponent],
-  entryComponents: [HeroJobAdComponent, HeroProfileComponent, NpsScheduleComponent],
+    HeaderComponent,
+    DialogContent],
+  entryComponents: [HeroJobAdComponent, HeroProfileComponent, NpsScheduleComponent, DialogContent],
   exports: [HomeComponent],
   providers: [AdService, SlideService, NpsClientsService, NpsClientsDataService],
   schemas: [NO_ERRORS_SCHEMA]

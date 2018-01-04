@@ -90,5 +90,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns" [ngClass]="{'highlight': selectedRowIndex == row}"></mat-header-row>
       <mat-row *matRowDef="let npsclient; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <span class="app-action buttonPositionTop" [class.m2app-dark]="isDarkTheme">
+        <button mat-fab style="background-color:#ffcc00;" (click)="openDialog()"><mat-icon class="material-icons md-18 iconWhite">add outline</mat-icon></button>
+    </span>
   </div>
 </div>

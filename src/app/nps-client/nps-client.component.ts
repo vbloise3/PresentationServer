@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
-import { MatTableDataSource, MatSort} from '@angular/material';
+import { Component, Optional, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
+import { MatTableDataSource, MatSort, MatDialog, MatDialogRef} from '@angular/material';
 import { NpsClientsService } from '../services/nps-clients.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
@@ -22,6 +22,7 @@ export class NpsClientComponent implements OnInit {
   // displayedColumns = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource3: any; // = new MatTableDataSource(data);
+  lastDialogResult: string;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -43,6 +44,24 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.update(el, copy);
   }
 
+  insert(el: NpsClient, position: string, name: string) {
+    // alert(name);
+    if (name == null) { return; }
+    // copy and mutate
+    const copy = this.dataSource3.data2().slice();
+    // alert(copy[0].name);
+    if ( position === 'name') {
+      el.name = name;
+    } else if ( position === 'department') {
+      el.department = name;
+    } else if ( position === 'schedule') {
+      el.schedule = name;
+    } else if ( position === 'relationshipManager') {
+      el.relationshipManager = name;
+    }
+    this.dataSource3.insert(el, copy);
+  }
+
   applyFilter(filterValue: string) {
     // alert(filterValue);
     filterValue = filterValue.trim(); // Remove whitespace
@@ -56,7 +75,7 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.sort = this.sort;
   }
 
-  constructor(private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
+  constructor(private _dialog: MatDialog, private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
     this.tableDataservice.get2().subscribe(dataRecieved => {
       data = dataRecieved;
       // this.stuff = Observable.of(data);
@@ -74,6 +93,14 @@ export class NpsClientComponent implements OnInit {
       this.npsclinets = npsclients as Array<NpsClient>;
     });*/
   }
+
+  openDialog() {
+    const dialogRef = this._dialog.open(DialogContent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.lastDialogResult = result;
+    });
+  }
 }
 
 let data: NpsClient[];
@@ -90,6 +117,11 @@ export class ExampleDataSource extends MatTableDataSource<any> {
     // alert('trying to call TableDataService ' + theNpsclient.name);
     // this.tableDataservice.save(this.dataSubject.getValue()[0]);
     this.tableDataservice.save(theNpsclient);
+  }
+
+  insert(theNpsclient, data2) {
+    this.dataSubject.next(data2);
+    this.tableDataservice.insert(theNpsclient);
   }
 
   constructor(public tableDataservice: NpsClientsDataService, data2: any[]) {
@@ -122,3 +154,26 @@ const ELEMENT_DATA: Element[] = [
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
 ];
+
+@Component({
+  template: `
+    <!--div id="container" class="centerIt"-->
+        <mat-toolbar color="primary" style="height: 3.15em; width: 111%; margin-left: -1em; margin-top: -1em;">
+            <img class="mdCardSmallDialogImg" src="app/app.component/MarinBioPic2.png">
+            <span id="center" class="textBottom largeFont" style="width: 50%; margin-left: -1em;">&nbsp;My Contact Info</span>
+        </mat-toolbar>
+    <!--/div-->
+    <table>
+        <tr>
+          <td><a href="mailto:meb339@scarletmail.rutgers.edu?Subject=Resume" style="color: blue;"><i class="material-icons md-18 iconBottom">email</i>meb339@scarletmail.rutgers.edu</a></td>
+          <td><a href="tel:610-308-1130" style="color: blue"><i class="material-icons md-18 iconBottom">phone_iphone</i>610-308-1130</a></td>
+        </tr>
+    </table>
+    <div class="centerIt2">
+        <button mat-raised-button (click)="dialogRef.close('done')">Done</button>
+    </div>
+  `,
+})
+export class DialogContent {
+  constructor(@Optional() public dialogRef: MatDialogRef<DialogContent>) { }
+}

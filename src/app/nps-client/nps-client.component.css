@@ -27,3 +27,17 @@
 .add-comment {
   opacity: 0.4;
 }
+
+.iconWhite {
+  position: relative;
+  color: white;
+  bottom: 0em;
+  z-index: 5;
+}
+
+.buttonPositionTop {
+  position: fixed;
+  z-index: 5;
+  bottom:20%;
+  right:20%;
+}

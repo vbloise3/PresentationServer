@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatToolbarModule, MatIconModule, MatMenuModule, MatButtonModule,
   MatInputModule, MatSelectModule, MatOptionModule,
-  MatCardModule, MatTableModule, MatSortModule
+  MatCardModule, MatTableModule, MatSortModule, MatDialogModule, MatSidenavModule
 } from '@angular/material';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -14,7 +14,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
   exports: [
     MatToolbarModule, MatIconModule, MatMenuModule, MatButtonModule,
     MatInputModule, MatSelectModule, MatOptionModule, MatCardModule,
-    MatTableModule, BrowserAnimationsModule, MatSortModule
+    MatTableModule, BrowserAnimationsModule, MatSortModule, MatDialogModule, MatSidenavModule
   ]
 })
 export class MyMaterialModule {}
