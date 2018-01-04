@@ -10,6 +10,10 @@ md-sidenav-container.m2app-dark {
   margin: 20px;
 }
 
+.mediumCard {
+  height: 950px;
+}
+
 .app-sidenav {
   padding: 10px;
   min-width: 100px;

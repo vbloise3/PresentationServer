@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 
@@ -30,7 +30,13 @@ export class NpsClientsDataService {
   }
 
   get2(): any {
-    return this.http.get<NpsClient[]>(service);
+    let headers = new HttpHeaders();
+    headers = headers.set('If-Modified-Since', '0');
+    headers = headers.append('Cache-control', 'no-cache');
+    headers = headers.append('Cache-control', 'no-store');
+    headers = headers.append('Expires', '0');
+    headers = headers.append('Pragma', 'no-cache');
+    return this.http.get<NpsClient[]>(service, {headers: headers});
   }
 
   save(npsclient) {

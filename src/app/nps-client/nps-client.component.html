@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div style="padding-left: 2em;padding-top: 32px;">
-  <div class="example-container mat-elevation-z8" style="width: 90%;">
+  <div class="example-container mat-elevation-z8" style="width: 90%;overflow: auto;max-height: 700px;">
     <div class="example-header">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
