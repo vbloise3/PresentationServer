@@ -91,7 +91,14 @@
       <mat-row *matRowDef="let npsclient; columns: displayedColumns;"></mat-row>
     </mat-table>
     <span class="app-action buttonPositionTop" [class.m2app-dark]="isDarkTheme">
-        <button mat-fab style="background-color:#ffcc00;" (click)="openDialog()"><mat-icon class="material-icons md-18 iconWhite">add outline</mat-icon></button>
+        <button mat-fab style="background-color:#ffcc00;" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconWhite">add outline</mat-icon></button>
+          <sat-popover #p
+                   hasBackdrop
+                   xPosition="after"
+                   yPosition="below"
+                   (closed)="insert('schedule', $event)">
+            <app-inline-insert [value]="Test" [title]="'Change Schedule'"></app-inline-insert>
+          </sat-popover>
     </span>
   </div>
 </div>

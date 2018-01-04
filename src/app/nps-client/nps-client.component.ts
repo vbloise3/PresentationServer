@@ -44,22 +44,24 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.update(el, copy);
   }
 
-  insert(el: NpsClient, position: string, name: string) {
+  insert(position: string, name: string) {
     // alert(name);
+    let npsclient: NpsClient;
+    npsclient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' '};
     if (name == null) { return; }
     // copy and mutate
     const copy = this.dataSource3.data2().slice();
     // alert(copy[0].name);
     if ( position === 'name') {
-      el.name = name;
+      npsclient.name = name;
     } else if ( position === 'department') {
-      el.department = name;
+      npsclient.department = name;
     } else if ( position === 'schedule') {
-      el.schedule = name;
+      npsclient.schedule = name;
     } else if ( position === 'relationshipManager') {
-      el.relationshipManager = name;
+      npsclient.relationshipManager = name;
     }
-    this.dataSource3.insert(el, copy);
+    this.dataSource3.insert(npsclient, copy);
   }
 
   applyFilter(filterValue: string) {
@@ -75,7 +77,7 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.sort = this.sort;
   }
 
-  constructor(private _dialog: MatDialog, private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
+  constructor(private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
     this.tableDataservice.get2().subscribe(dataRecieved => {
       data = dataRecieved;
       // this.stuff = Observable.of(data);
@@ -92,14 +94,6 @@ export class NpsClientComponent implements OnInit {
     /*this.npsclientsService.getAllNpsClients().subscribe(npsclients => {
       this.npsclinets = npsclients as Array<NpsClient>;
     });*/
-  }
-
-  openDialog() {
-    const dialogRef = this._dialog.open(DialogContent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.lastDialogResult = result;
-    });
   }
 }
 
@@ -155,25 +149,3 @@ const ELEMENT_DATA: Element[] = [
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
 ];
 
-@Component({
-  template: `
-    <!--div id="container" class="centerIt"-->
-        <mat-toolbar color="primary" style="height: 3.15em; width: 111%; margin-left: -1em; margin-top: -1em;">
-            <img class="mdCardSmallDialogImg" src="app/app.component/MarinBioPic2.png">
-            <span id="center" class="textBottom largeFont" style="width: 50%; margin-left: -1em;">&nbsp;My Contact Info</span>
-        </mat-toolbar>
-    <!--/div-->
-    <table>
-        <tr>
-          <td><a href="mailto:meb339@scarletmail.rutgers.edu?Subject=Resume" style="color: blue;"><i class="material-icons md-18 iconBottom">email</i>meb339@scarletmail.rutgers.edu</a></td>
-          <td><a href="tel:610-308-1130" style="color: blue"><i class="material-icons md-18 iconBottom">phone_iphone</i>610-308-1130</a></td>
-        </tr>
-    </table>
-    <div class="centerIt2">
-        <button mat-raised-button (click)="dialogRef.close('done')">Done</button>
-    </div>
-  `,
-})
-export class DialogContent {
-  constructor(@Optional() public dialogRef: MatDialogRef<DialogContent>) { }
-}

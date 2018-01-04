@@ -69,7 +69,7 @@ export class NpsClientsDataService {
       'relationshipManager': npsclient.relationshipManager
     }).subscribe(
       dataOut => {
-        console.log('PUT Request is successful ', dataOut);
+        console.log('POST Request is successful ', dataOut);
       },
       error => {
         console.log('Error', error);
