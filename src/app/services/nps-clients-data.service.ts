@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone, ApplicationRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
@@ -16,15 +16,17 @@ export interface NpsClient {
 @Injectable()
 export class NpsClientsDataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private changeDetect: ApplicationRef, private zone: NgZone, private http: HttpClient) { }
 
 
   get() {
     this.http.get<NpsClient[]>(service).subscribe(data => {
-      console.log(data);
-      npsClients = data;
-      console.log('get() - npsClients #1 name: ' + npsClients[0].name);
-      console.log('get() - npsClients #1 department: ' + npsClients[0].department);
+      this.zone.run(() => {
+        console.log(data);
+        npsClients = data;
+        console.log('get() - npsClients #1 name: ' + npsClients[0].name);
+        console.log('get() - npsClients #1 department: ' + npsClients[0].department);
+      });
     });
     return npsClients;
   }
@@ -62,6 +64,12 @@ export class NpsClientsDataService {
     // alert('about to insert ' + npsclient._id);
     const url = service; // + '/' + npsclient._id;
     const body = JSON.stringify(npsclient);
+    let headers = new HttpHeaders();
+    headers = headers.set('If-Modified-Since', '0');
+    headers = headers.append('Cache-control', 'no-cache');
+    headers = headers.append('Cache-control', 'no-store');
+    headers = headers.append('Expires', '-1');
+    headers = headers.append('Pragma', 'no-cache');
     this.http.post(url, {
       'name': npsclient.name,
       'department': npsclient.department,
@@ -97,9 +105,11 @@ export class NpsClientsDataService {
   load(symbols) {
     if (symbols) {
       return this.http.get<NpsClient[]>(service).subscribe(data => {
-        npsClients = data;
-        console.log('get() - npsClients #1 name: ' + npsClients[0].name);
-        console.log('get() - npsClients #1 department: ' + npsClients[0].department);
+        this.zone.run(() => {
+          npsClients = data;
+          console.log('get() - npsClients #1 name: ' + npsClients[0].name);
+          console.log('get() - npsClients #1 department: ' + npsClients[0].department);
+        });
       });
     }
   }

@@ -42,6 +42,34 @@
   z-index: 5;
 }
 
+.iconBlue {
+  position: relative;
+  color: blue;
+  bottom: -0.4em;
+  z-index: 5;
+}
+
+.iconGreen {
+  position: relative;
+  color: green;
+  bottom: -0.4em;
+  z-index: 5;
+}
+
+.vl {
+  border-left: 3px solid grey;
+  height: 20px;
+  padding-top: 0.5em;
+}
+
+.space {
+  margin-left: 2.5em;
+}
+
+.iconFloatRight {
+  float: right;
+}
+
 .mat-fab.mat-small {
   min-width: 10%;
 }

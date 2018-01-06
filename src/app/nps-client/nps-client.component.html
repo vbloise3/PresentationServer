@@ -6,6 +6,17 @@
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
+      <div class="iconFloatRight">
+        <button class="mat-icon-button" (click)="refresh()"><mat-icon class="material-icons md-18 iconBlue">cached outline</mat-icon></button>
+        <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconGreen">add outline</mat-icon></button>
+      </div>
+      <sat-popover #p
+                   hasBackdrop
+                   xPosition="after"
+                   yPosition="below"
+                   (closed)="insert('all', $event)">
+        <app-inline-insert [value]="''" [value2]="''" [value3]="''" [value4]="''" [title]="'Add New NPS Client'"></app-inline-insert>
+      </sat-popover>
     </div>
     <mat-table #table [dataSource]="dataSource3" matSort>
       <!-- Name Column -->

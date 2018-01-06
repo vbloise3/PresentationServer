@@ -1,4 +1,4 @@
-import { Component, Optional, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Optional, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, NgZone, ApplicationRef } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog, MatDialogRef} from '@angular/material';
 import { NpsClientsService } from '../services/nps-clients.service';
 import { DataSource } from '@angular/cdk/collections';
@@ -50,13 +50,11 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.delete(el, copy);
     // retrieve the newly updated table data
     this.tableDataservice.get2().subscribe(dataRecieved => {
-      data = dataRecieved;
-      // this.stuff = Observable.of(data);
-      // this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
-      // this.dataSource3 = new MatDataTableSource(data);
-      // this.dataSource3 = new MatTableDataSource(data);
-      this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
-      this.dataSource3.sort = this.sort;
+      this.zone.run(() => {
+        data = dataRecieved;
+        this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+        this.dataSource3.sort = this.sort;
+      });
     });
     // end retrieve newly updated table data
   }
@@ -86,14 +84,13 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.insert(npsclient, copy);
     // retrieve the newly updated table data
     this.tableDataservice.get2().subscribe(dataRecieved => {
-      data = dataRecieved;
-      // this.stuff = Observable.of(data);
-      // this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
-      // this.dataSource3 = new MatDataTableSource(data);
-      // this.dataSource3 = new MatTableDataSource(data);
-      this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
-      this.dataSource3.sort = this.sort;
+      this.zone.run(() => {
+        data = dataRecieved;
+        this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+        this.dataSource3.sort = this.sort;
+      });
     });
+    this.changeDetect.tick();
     // end retrieve newly updated table data
   }
 
@@ -104,13 +101,24 @@ export class NpsClientComponent implements OnInit {
     this.dataSource3.filter = filterValue;
   }
 
+  refresh() {
+    this.tableDataservice.get2().subscribe(dataReceived => {
+      this.zone.run(() => {
+        data = dataReceived;
+        this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+        this.dataSource3.sort = this.sort;
+      });
+    });
+    this.changeDetect.tick();
+  }
+
   /* set the sort after the view init since this component will be able to query its view for the initialized sort */
 
   ngAfterInit() {
     this.dataSource3.sort = this.sort;
   }
 
-  constructor(private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
+  constructor(private changeDetect: ApplicationRef, private zone: NgZone, private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
     this.tableDataservice.get2().subscribe(dataRecieved => {
       data = dataRecieved;
       // this.stuff = Observable.of(data);
