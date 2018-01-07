@@ -11,6 +11,7 @@ export interface NpsClient {
   department: string;
   schedule: string;
   relationshipManager: string;
+  _id: string;
 }
 
 @Injectable()

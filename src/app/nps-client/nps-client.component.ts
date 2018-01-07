@@ -26,13 +26,27 @@ export class NpsClientComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  update(el: NpsClient, position: string, name: string) {
-    // alert(name);
+  update(el: NpsClient, position: string, name: any) {
+    // alert('update: ' + el.name);
     if (name == null) { return; }
+    let npsclient: NpsClient;
+    npsclient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' ', _id: ' '};
     // copy and mutate
     const copy = this.dataSource3.data2().slice();
     // alert(copy[0].name);
-    if ( position === 'name') {
+    if ( position === 'all') {
+      npsclient.name = el.name;
+      npsclient.department = el.department;
+      npsclient.schedule = el.schedule;
+      npsclient.relationshipManager = el.relationshipManager;
+      npsclient._id = el._id;
+    } else if (position === 'update' ) {
+      el.name = name.name;
+      el.department = name.department;
+      el.schedule = name.schedule;
+      el.relationshipManager = name.relationshipManager;
+      el._id = name._id;
+    } else if ( position === 'name') {
       el.name = name;
     } else if ( position === 'department') {
       el.department = name;
@@ -41,7 +55,11 @@ export class NpsClientComponent implements OnInit {
     } else if ( position === 'relationshipManager') {
       el.relationshipManager = name;
     }
-    this.dataSource3.update(el, copy);
+    if ( position === 'all' ) {
+      this.dataSource3.update(npsclient, copy);
+    } else {
+      this.dataSource3.update(el, copy);
+    }
   }
 
   delete(el: NpsClient, position: string, theNewNpsClient: NpsClient) {
@@ -59,19 +77,31 @@ export class NpsClientComponent implements OnInit {
     // end retrieve newly updated table data
   }
 
-  insert(position: string, theNewNpsClient: NpsClient) {
-    // alert(theNewNpsClient);
+  insert(el: NpsClient, position: string, theNewNpsClient: NpsClient) {
+    // alert(theNewNpsClient._id);
     let npsclient: NpsClient;
-    npsclient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' '};
+    npsclient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' ', _id: ' '};
     if (theNewNpsClient == null) { return; }
     // copy and mutate
     const copy = this.dataSource3.data2().slice();
+    const copy2 = Object.assign({}, theNewNpsClient);
     // alert(copy[0].name);
     if ( position === 'all' ) {
       npsclient.name = theNewNpsClient.name;
       npsclient.department = theNewNpsClient.department;
       npsclient.schedule = theNewNpsClient.schedule;
       npsclient.relationshipManager = theNewNpsClient.relationshipManager;
+      npsclient._id = theNewNpsClient._id;
+    } else if ( position === 'update' ) {
+      npsclient.name = theNewNpsClient.name;
+      el.name = copy2.name;
+      npsclient.department = theNewNpsClient.department;
+      el.department = copy2.department;
+      npsclient.schedule = theNewNpsClient.schedule;
+      el.schedule = copy2.schedule;
+      npsclient.relationshipManager = theNewNpsClient.relationshipManager;
+      el.relationshipManager = copy2.relationshipManager;
+      npsclient._id = el._id;
     } else if ( position === 'name') {
       npsclient.name = theNewNpsClient.name;
     } else if ( position === 'department') {
@@ -81,16 +111,22 @@ export class NpsClientComponent implements OnInit {
     } else if ( position === 'relationshipManager') {
       npsclient.relationshipManager = theNewNpsClient.relationshipManager;
     }
-    this.dataSource3.insert(npsclient, copy);
+    if ( position === 'update') {
+      this.dataSource3.update(npsclient, copy);
+    } else {
+      this.dataSource3.insert(npsclient, copy);
+    }
     // retrieve the newly updated table data
-    this.tableDataservice.get2().subscribe(dataRecieved => {
-      this.zone.run(() => {
-        data = dataRecieved;
-        this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
-        this.dataSource3.sort = this.sort;
+    if ( position !== 'update') {
+      this.tableDataservice.get2().subscribe(dataRecieved => {
+        this.zone.run(() => {
+          data = dataRecieved;
+          this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+          this.dataSource3.sort = this.sort;
+        });
       });
-    });
-    this.changeDetect.tick();
+      this.changeDetect.tick();
+    }
     // end retrieve newly updated table data
   }
 
@@ -149,7 +185,7 @@ export class ExampleDataSource extends MatTableDataSource<any> {
 
   update(theNpsclient, data2) {
     this.dataSubject.next(data2);
-    // alert('trying to call TableDataService ' + theNpsclient.name);
+    // alert('trying to call TableDataService ' + theNpsclient._id);
     // this.tableDataservice.save(this.dataSubject.getValue()[0]);
     this.tableDataservice.save(theNpsclient);
   }
@@ -178,8 +214,8 @@ export class ExampleDataSource extends MatTableDataSource<any> {
 }
 
 const NPSCLIENT_DATA: NpsClient[] = [
-  {name: 'dfgdfg', department: 'ghjrdgj', schedule: 'sdfgdsg', relationshipManager: 'sdfsd'},
-  {name: 'lghl', department: 'tyurtyu', schedule: 'ewrrwe', relationshipManager: 'jvbnvb'},
+  {name: 'dfgdfg', department: 'ghjrdgj', schedule: 'sdfgdsg', relationshipManager: 'sdfsd', _id: 'dsf'},
+  {name: 'lghl', department: 'tyurtyu', schedule: 'ewrrwe', relationshipManager: 'jvbnvb', _id: 'cv'},
 ];
 
 export interface Element {

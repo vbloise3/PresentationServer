@@ -35,6 +35,12 @@ export class InlineInsertComponent implements OnInit {
   }
   private _value4 = '';
   @Input()
+  get value5(): string { return this._value5; }
+  set value5(x: string) {
+    this._id = this._value5 = x;
+  }
+  private _value5 = '';
+  @Input()
   get title(): string { return this._title; }
   set title(x: string) {
     this.heading = this._title = x;
@@ -47,7 +53,8 @@ export class InlineInsertComponent implements OnInit {
   schedule = '';
   relationshipManager = '';
   heading = '';
-  theNewNpsClient: NpsClient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' '};
+  _id = '';
+  theNewNpsClient: NpsClient = {name: ' ', department: ' ', schedule: ' ', relationshipManager: ' ', _id: ' '};
   returnValue = '';
 
   @Output() update = new EventEmitter<NpsClient>();
@@ -64,6 +71,7 @@ export class InlineInsertComponent implements OnInit {
           this.department = this.value2 || '';
           this.schedule = this.value3 || '';
           this.relationshipManager = this.value4 || '';
+          this._id = this.value5 || '';
           this.heading = this.title || '';
       });
     }
@@ -75,6 +83,7 @@ export class InlineInsertComponent implements OnInit {
       this.theNewNpsClient.department = this.department;
       this.theNewNpsClient.schedule = this.schedule;
       this.theNewNpsClient.relationshipManager = this.relationshipManager;
+      this.theNewNpsClient._id = this._id;
       this.popover.close(this.theNewNpsClient);
     }
   }

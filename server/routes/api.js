@@ -382,7 +382,7 @@ router.route('/npsclients/:npsclient_id')
         if (err)
           res.send(err);
 
-        res.json({ message: 'Npsclient updated!' });
+        res.json({ message: 'Npsclient updated!' + npsclient.name });
       });
 
     });
