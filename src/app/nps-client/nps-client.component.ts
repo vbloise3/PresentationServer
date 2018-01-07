@@ -22,9 +22,15 @@ export class NpsClientComponent implements OnInit {
   // displayedColumns = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource3: any; // = new MatTableDataSource(data);
+  data: NpsClient[];
+  filterValueMain: string;
   lastDialogResult: string;
 
   @ViewChild(MatSort) sort: MatSort;
+
+  insertIt = new Promise(function(resolve, reject) {
+    resolve('done');
+  });
 
   update(el: NpsClient, position: string, name: any) {
     // alert('update: ' + el.name);
@@ -69,8 +75,8 @@ export class NpsClientComponent implements OnInit {
     // retrieve the newly updated table data
     this.tableDataservice.get2().subscribe(dataRecieved => {
       this.zone.run(() => {
-        data = dataRecieved;
-        this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+        this.data = dataRecieved;
+        this.dataSource3 = new ExampleDataSource(this.tableDataservice, this.data);
         this.dataSource3.sort = this.sort;
       });
     });
@@ -114,19 +120,35 @@ export class NpsClientComponent implements OnInit {
     if ( position === 'update') {
       this.dataSource3.update(npsclient, copy);
     } else {
-      this.dataSource3.insert(npsclient, copy);
+      const outerThis = this;
+      const job1 = new Promise (function(resolve, reject) {
+        outerThis.dataSource3.insert(npsclient, copy);
+        resolve();
+      });
+      job1.then(function(dataOut) {
+        // retrieve the newly updated table data
+          // alert('in job1 promise');
+          outerThis.tableDataservice.get2().subscribe(dataRecieved => {
+              // alert(dataRecieved);
+              outerThis.data = dataRecieved;
+              outerThis.dataSource3 = new ExampleDataSource(outerThis.tableDataservice, outerThis.data);
+              outerThis.dataSource3.sort = outerThis.sort;
+          });
+          outerThis.changeDetect.tick();
+        // end retrieve newly updated table data
+      });
     }
     // retrieve the newly updated table data
-    if ( position !== 'update') {
+    /*if ( position !== 'update') {
       this.tableDataservice.get2().subscribe(dataRecieved => {
         this.zone.run(() => {
-          data = dataRecieved;
-          this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+          this.data = dataRecieved;
+          this.dataSource3 = new ExampleDataSource(this.tableDataservice, this.data);
           this.dataSource3.sort = this.sort;
         });
       });
       this.changeDetect.tick();
-    }
+    }*/
     // end retrieve newly updated table data
   }
 
@@ -135,14 +157,16 @@ export class NpsClientComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource3.filter = filterValue;
+    this.filterValueMain = filterValue;
   }
 
   refresh() {
     this.tableDataservice.get2().subscribe(dataReceived => {
       this.zone.run(() => {
-        data = dataReceived;
-        this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+        this.data = dataReceived;
+        this.dataSource3 = new ExampleDataSource(this.tableDataservice, this.data);
         this.dataSource3.sort = this.sort;
+        this.applyFilter(this.filterValueMain);
       });
     });
     this.changeDetect.tick();
@@ -156,12 +180,12 @@ export class NpsClientComponent implements OnInit {
 
   constructor(private changeDetect: ApplicationRef, private zone: NgZone, private npsclientsService: NpsClientsService, public tableDataservice: NpsClientsDataService) {
     this.tableDataservice.get2().subscribe(dataRecieved => {
-      data = dataRecieved;
+      this.data = dataRecieved;
       // this.stuff = Observable.of(data);
       // this.dataSource = new ExampleDataSource(tableDataservice, this.stuff);
       // this.dataSource3 = new MatDataTableSource(data);
       // this.dataSource3 = new MatTableDataSource(data);
-      this.dataSource3 = new ExampleDataSource(this.tableDataservice, data);
+      this.dataSource3 = new ExampleDataSource(this.tableDataservice, this.data);
       this.dataSource3.sort = this.sort;
     });
   }
@@ -174,7 +198,7 @@ export class NpsClientComponent implements OnInit {
   }
 }
 
-let data: NpsClient[];
+/*let data: NpsClient[];*/
 
 export class ExampleDataSource extends MatTableDataSource<any> {
   private dataSubject = new BehaviorSubject<NpsClient[]>([]);

@@ -101,31 +101,39 @@
       <ng-container matColumnDef="actions" style="width: 40%;">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
         <mat-cell class="mat-column-comment" *matCellDef="let npsclient">
-          <div class="iconFloatRight">
-            <!-- edit button -->
-            <span class="app-action" [class.m2app-dark]="isDarkTheme">
-              <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconBlue">mode_edit outline</mat-icon></button>
-                <sat-popover #p
-                             hasBackdrop
-                             xPosition="after"
-                             yPosition="below"
-                             (closed)="insert(npsclient, 'update', $event)">
-                  <app-inline-insert [value]="npsclient.name" [value2]="npsclient.department" [value3]="npsclient.schedule" [value4]="npsclient.relationshipManager" [value5]="npsclient._id" [title]="'Edit ' + npsclient.name"></app-inline-insert>
-                </sat-popover>
-            </span>
-            <!-- end edit button -->
-            <!-- delete button -->
-            <span class="app-action" [class.m2app-dark]="isDarkTheme">
-              <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconRed">delete outline</mat-icon></button>
-                <sat-popover #p
-                             hasBackdrop
-                             xPosition="after"
-                             yPosition="below"
-                             (closed)="delete(npsclient, 'all', $event)">
-                  <app-inline-edit [value]="npsclient" [title]="'Delete ' + npsclient.name + '?'"></app-inline-edit>
-                </sat-popover>
-            </span>
-            <!-- end delete button -->
+          <div>
+            <table style="border: none;">
+              <tr>
+                <td>
+                  <!-- edit button -->
+                  <span class="app-action" [class.m2app-dark]="isDarkTheme">
+                    <button class="mat-icon-button" [satPopoverAnchorFor]="q" (click)="q.open()"><mat-icon class="material-icons md-18 iconBlue">mode_edit outline</mat-icon></button>
+                      <sat-popover #q
+                                   hasBackdrop
+                                   xPosition="after"
+                                   yPosition="below"
+                                   (closed)="insert(npsclient, 'update', $event)">
+                        <app-inline-insert [value]="npsclient.name" [value2]="npsclient.department" [value3]="npsclient.schedule" [value4]="npsclient.relationshipManager" [value5]="npsclient._id" [title]="'Edit ' + npsclient.name"></app-inline-insert>
+                      </sat-popover>
+                  </span>
+                  <!-- end edit button -->
+                </td>
+                <td>
+                  <!-- delete button -->
+                  <span class="app-action" [class.m2app-dark]="isDarkTheme">
+                    <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconRed">delete outline</mat-icon></button>
+                      <sat-popover #p
+                                   hasBackdrop
+                                   xPosition="after"
+                                   yPosition="below"
+                                   (closed)="delete(npsclient, 'all', $event)">
+                        <app-inline-edit [value]="npsclient" [title]="'Delete ' + npsclient.name + '?'"></app-inline-edit>
+                      </sat-popover>
+                  </span>
+                  <!-- end delete button -->
+                </td>
+              </tr>
+            </table>
           </div>
         </mat-cell>
       </ng-container>

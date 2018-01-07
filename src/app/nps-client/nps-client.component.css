@@ -111,3 +111,7 @@ button:active {
   outline: none;
   border: none;
 }
+
+.mat-column-actions {
+  flex: 0 0 15px;
+}
