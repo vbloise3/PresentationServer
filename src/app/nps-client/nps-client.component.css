@@ -115,3 +115,74 @@ button:active {
 .mat-column-actions {
   flex: 0 0 15px;
 }
+
+.refreshBtn
+{
+  background:transparent url('../../../public/icons/sync_24px.svg') no-repeat;
+  color: blue;
+}
+
+.addBtn
+{
+  background:transparent url('../../../public/icons/add_24px.svg') no-repeat;
+  color: green;
+}
+
+.editBtn
+{
+  background:transparent url('../../../public/icons/edit_24px.svg') no-repeat;
+  color: blue;
+}
+
+.deleteBtn
+{
+  background:transparent url('../../../public/icons/delete_24px.svg') no-repeat;
+  color: red;
+}
+
+.addWhiteBtn
+{
+  background:transparent url('../../../public/icons/add_white_24px.svg') no-repeat;
+  color: red;
+}
+
+.local-mat-icon-button {
+  padding: 0;
+  min-width: 0;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  line-height: 40px;
+  border-radius: 50%;
+  border-color: transparent;
+  cursor: pointer;
+  bottom: 0.1em;
+  left: -0.3em;
+}
+
+.iconPositioning{
+  transform: translate(0px,15px);
+  -ms-transform: translate(0px,15px); /* IE 9 */
+  -webkit-transform: translate(0px,15px); /* Safari and Chrome */
+  -o-transform: translate(0px,15px); /* Opera */
+  -moz-transform: translate(0px,15px); /* Firefox */
+}
+
+.iconRowPositioning{
+  transform: translate(0px,0px);
+  -ms-transform: translate(0px,0px); /* IE 9 */
+  -webkit-transform: translate(0px,0px); /* Safari and Chrome */
+  -o-transform: translate(0px,0px); /* Opera */
+  -moz-transform: translate(0px,0px); /* Firefox */
+  margin-top: 1em;
+}
+
+.iconFloatinButtonPositioning{
+  transform: translate(0px,0px);
+  -ms-transform: translate(0px,0px); /* IE 9 */
+  -webkit-transform: translate(0px,0px); /* Safari and Chrome */
+  -o-transform: translate(0px,0px); /* Opera */
+  -moz-transform: translate(0px,0px); /* Firefox */
+  margin-top: 0em;
+  margin-left: 1em;
+}

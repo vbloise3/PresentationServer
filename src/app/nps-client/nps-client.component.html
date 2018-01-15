@@ -7,8 +7,14 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
       <div class="iconFloatRight">
-        <button class="mat-icon-button" (click)="refresh()"><mat-icon class="material-icons md-18 iconBlue">sync</mat-icon></button>
-        <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconGreen">add</mat-icon></button>
+        <div *ngIf="browserType == 'Chrome'">
+          <button class="local-mat-icon-button refreshBtn iconPositioning" (click)="refresh()"></button>
+          <button class="local-mat-icon-button addBtn iconPositioning" [satPopoverAnchorFor]="p" (click)="p.open()"></button>
+        </div>
+        <div *ngIf="browserType != 'Chrome'">
+          <button class="mat-icon-button" (click)="refresh()"><mat-icon class="material-icons md-18 iconBlue">sync</mat-icon></button>
+          <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconGreen">add</mat-icon></button>
+        </div>
       </div>
       <sat-popover #p
                    hasBackdrop
@@ -107,7 +113,12 @@
                 <td>
                   <!-- edit button -->
                   <span class="app-action" [class.m2app-dark]="isDarkTheme">
-                    <button class="mat-icon-button" [satPopoverAnchorFor]="q" (click)="q.open()"><mat-icon class="material-icons md-18 iconBlue">edit</mat-icon></button>
+                    <div *ngIf="browserType == 'Chrome'">
+                      <button class="local-mat-icon-button editBtn iconRowPositioning" [satPopoverAnchorFor]="q" (click)="q.open()"></button>
+                    </div>
+                    <div *ngIf="browserType != 'Chrome'">
+                      <button class="mat-icon-button" [satPopoverAnchorFor]="q" (click)="q.open()"><mat-icon class="material-icons md-18 iconBlue">edit</mat-icon></button>
+                    </div>
                       <sat-popover #q
                                    hasBackdrop
                                    xPosition="after"
@@ -121,7 +132,12 @@
                 <td>
                   <!-- delete button -->
                   <span class="app-action" [class.m2app-dark]="isDarkTheme">
-                    <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconRed">delete</mat-icon></button>
+                    <div *ngIf="browserType == 'Chrome'">
+                      <button class="local-mat-icon-button deleteBtn iconRowPositioning" [satPopoverAnchorFor]="p" (click)="p.open()"></button>
+                    </div>
+                    <div *ngIf="browserType != 'Chrome'">
+                      <button class="mat-icon-button" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconRed">delete</mat-icon></button>
+                    </div>
                       <sat-popover #p
                                    hasBackdrop
                                    xPosition="after"
@@ -142,7 +158,14 @@
       <mat-row *matRowDef="let npsclient; columns: displayedColumns;"></mat-row>
     </mat-table>
     <span class="app-action buttonPositionTop" [class.m2app-dark]="isDarkTheme">
-        <button mat-fab style="background-color:#ffcc00;" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconWhite">add</mat-icon></button>
+        <div *ngIf="browserType == 'Chrome'">
+          <button mat-fab style="background-color:#ffcc00;" [satPopoverAnchorFor]="p" (click)="p.open()">
+            <button class="local-mat-icon-button addWhiteBtn iconFloatinButtonPositioning"></button>
+          </button>
+        </div>
+        <div *ngIf="browserType != 'Chrome'">
+          <button mat-fab style="background-color:#ffcc00;" [satPopoverAnchorFor]="p" (click)="p.open()"><mat-icon class="material-icons md-18 iconWhite">add</mat-icon></button>
+        </div>
           <sat-popover #p
                    hasBackdrop
                    xPosition="after"
